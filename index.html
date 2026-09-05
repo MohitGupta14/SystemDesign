@@ -80,6 +80,14 @@
   }
   nav.tabs button.active{color:var(--paper); border-color:var(--line); background:var(--ink-2);}
   nav.tabs button:hover{color:var(--paper);}
+  .gh-link{
+    text-decoration:none; color:var(--paper-dim); font-size:12px;
+    border:1px solid var(--line); padding:6px 12px; border-radius:var(--radius);
+    display:flex; align-items:center; gap:7px; white-space:nowrap;
+    background:var(--ink-2);
+  }
+  .gh-link .gh-ico{font-size:14px; color:var(--cyan);}
+  .gh-link:hover{color:var(--paper); border-color:var(--cyan-dim);}
   .search-wrap{margin-left:auto; display:flex; align-items:center; gap:8px;}
   #search{
     background:var(--ink-2); border:1px solid var(--line); color:var(--paper);
@@ -103,6 +111,14 @@
   .hero p.lede{
     max-width:600px; color:var(--paper-dim); font-size:16px; margin-top:16px;
   }
+  .hero-ctas{display:flex; gap:10px; margin-top:22px; flex-wrap:wrap;}
+  .hero-ctas a{
+    text-decoration:none; font-size:13px; padding:9px 16px; border-radius:var(--radius);
+    border:1px solid var(--line); color:var(--paper-dim); background:var(--ink-2);
+  }
+  .hero-ctas a.primary{color:var(--ink); background:var(--cyan); border-color:var(--cyan); font-weight:600;}
+  .hero-ctas a:hover{color:var(--paper); border-color:var(--cyan-dim);}
+  .hero-ctas a.primary:hover{color:var(--ink); background:var(--cyan);}
   .stats-row{display:flex; gap:36px; margin-top:32px; flex-wrap:wrap;}
   .stat b{display:block; font-family:'Space Grotesk',sans-serif; font-size:26px; color:var(--paper);}
   .stat span{color:var(--muted); font-size:12.5px;}
@@ -118,7 +134,7 @@
   .step-line li{
     display:flex; align-items:baseline; gap:14px; padding:9px 0;
     border-top:1px dashed var(--line-soft);
-    font-size:14.5px;
+    font-size:14.5px; cursor:pointer;
   }
   .step-line li:first-child{border-top:none;}
   .step-line .num{
@@ -127,6 +143,7 @@
   .step-line a.res-link{color:var(--cyan); text-decoration:none; border-bottom:1px solid var(--cyan-dim);}
   .step-line a.res-link:hover{border-color:var(--cyan);}
   .step-line .via{color:var(--muted); font-size:12px;}
+  .step-line li:not(:has(a)):hover .num{color:var(--cyan);}
 
   /* ===== toolbar ===== */
   .toolbar{
@@ -157,6 +174,9 @@
   /* ===== main content ===== */
   main{max-width:1100px; margin:0 auto; padding:20px 28px 100px;}
 
+  .view{display:none;}
+  .view.active{display:block;}
+
   .level-block{margin-top:52px;}
   .level-head{
     display:flex; align-items:baseline; gap:14px; margin-bottom:6px;
@@ -176,7 +196,11 @@
     border:1px solid var(--line); background:var(--ink-2);
     border-radius:5px; padding:16px 16px 14px;
     display:flex; flex-direction:column; gap:10px;
+    cursor:pointer; position:relative;
+    transition:border-color .12s ease, transform .12s ease, box-shadow .12s ease;
   }
+  .topic-card:hover{border-color:var(--cyan-dim); box-shadow:0 6px 18px rgba(0,0,0,.35), 0 0 0 1px rgba(111,211,192,.08);}
+  .topic-card:active{transform:translateY(1px);}
   .topic-card.hidden{display:none;}
   .topic-top{display:flex; justify-content:space-between; align-items:flex-start; gap:8px;}
   .topic-top h4{font-size:15.5px; color:var(--paper);}
@@ -189,6 +213,8 @@
   .diff-Advanced{color:var(--red-flag); border-color:#6E4038;}
 
   .topic-cat{font-size:11px; color:var(--muted); font-family:'JetBrains Mono',monospace;}
+  .topic-about{font-size:13px; color:var(--paper-dim); margin:0; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; line-height:1.5;}
+  .details-hint{font-size:10.5px; color:var(--muted); font-family:'JetBrains Mono',monospace; letter-spacing:.05em;}
 
   .res-list{list-style:none; margin:2px 0 0; padding:0; display:flex; flex-direction:column; gap:6px;}
   .res-list li{
@@ -212,22 +238,98 @@
   .rec-star{color:var(--cyan); font-size:11px;}
   .tilde{color:var(--muted); cursor:help;}
 
-  /* ===== websites view ===== */
-  #websites-view{display:none;}
+  /* ===== roadmap view ===== */
+  #roadmap-view .view-head{border-bottom:1px solid var(--line); padding-bottom:14px; margin-bottom:10px;}
+  #roadmap-view .view-head h2{font-size:21px;}
+  #roadmap-view .view-head p{color:var(--muted); font-size:13.5px; margin:6px 0 0;}
+  .roadmap-track{position:relative; padding-top:8px;}
+  .roadmap-track::before{
+    content:""; position:absolute; left:9px; top:6px; bottom:6px; width:2px;
+    background:linear-gradient(180deg, var(--cyan-dim), var(--line) 60%, var(--cyan-dim));
+  }
+  .r-stage{position:relative; padding-left:38px; margin-bottom:4px; padding-bottom:6px;}
+  .r-head-dot{
+    position:absolute; left:2px; top:8px; width:16px; height:16px;
+    background:var(--ink-3); border:2px solid var(--cyan-dim); transform:rotate(45deg); border-radius:2px;
+  }
+  .r-stage.open .r-head-dot{border-color:var(--cyan); background:var(--cyan);}
+  .r-stage-head{margin-bottom:8px;}
+  .r-stage-head .r-lvl-num{font-family:'JetBrains Mono',monospace; color:var(--cyan); font-size:12px; letter-spacing:.08em;}
+  .r-stage-head h3{font-size:17px; color:var(--paper); margin-top:2px;}
+  .r-stage-head p{color:var(--muted); font-size:12.5px; margin:3px 0 0; max-width:640px;}
+  .r-nodes{display:flex; flex-wrap:wrap; gap:10px;}
+  .rnode{display:flex; flex-direction:column; gap:6px; max-width:270px;}
+  .rnode-btn{
+    display:flex; align-items:center; gap:9px;
+    background:var(--ink-2); border:1px solid var(--line); border-radius:6px;
+    padding:10px 13px; cursor:pointer; color:var(--paper-dim); font-size:13px;
+    text-align:left; font-family:'Inter',sans-serif; line-height:1.3;
+    transition:border-color .12s ease, box-shadow .12s ease, background .12s ease;
+  }
+  .rnode-btn:hover{border-color:var(--cyan-dim); color:var(--paper);}
+  .rnode.selected .rnode-btn{border-color:var(--cyan); background:linear-gradient(180deg, rgba(111,211,192,.10), rgba(111,211,192,.02)); color:var(--paper); box-shadow:0 0 0 1px var(--cyan-dim);}
+  .rnode-dot{width:9px; height:9px; border-radius:50%; background:var(--cyan); flex-shrink:0;}
+  .rnode[data-diff="Intermediate"] .rnode-dot{background:var(--amber);}
+  .rnode[data-diff="Advanced"] .rnode-dot{background:var(--red-flag);}
+  .rnode-name{flex:1;}
+  .rnode-name .mono-tag{display:block; font-size:9.5px; color:var(--muted); font-family:'JetBrains Mono',monospace; margin-top:2px; letter-spacing:.05em;}
+  .rsubs{display:flex; flex-wrap:wrap; gap:5px; padding-left:10px;}
+  .rsub{
+    font-size:10.5px; font-family:'JetBrains Mono',monospace; color:var(--muted);
+    border:1px dashed var(--line); background:none; border-radius:12px; padding:3px 8px;
+    cursor:pointer; letter-spacing:.02em;
+  }
+  .rsub:hover{color:var(--cyan); border-color:var(--cyan-dim);}
+  .rsub.active{color:var(--ink); background:var(--cyan); border-style:solid; border-color:var(--cyan);}
+  .r-connector{position:relative; width:2px; height:24px; background:var(--line-soft); margin:4px 0 12px; left:9px;}
+  .r-hint{color:var(--muted); font-size:12px; border:1px dashed var(--line); border-radius:4px; padding:8px 12px; margin:14px 0 4px; background:rgba(111,211,192,.03);}
+
+  /* ===== resources view ===== */
   .site-grid{
-    display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:16px; margin-top:28px;
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:16px; margin-top:24px;
   }
   .site-card{
     border:1px solid var(--line); background:var(--ink-2); border-radius:6px; padding:20px;
+    display:flex; flex-direction:column; gap:10px;
   }
-  .site-card h3{font-size:18px; margin-bottom:6px;}
+  .site-card h3{font-size:18px;}
   .site-card a.base{
     font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--cyan);
     text-decoration:none; word-break:break-all;
   }
-  .site-card p{color:var(--paper-dim); font-size:13.5px; margin:12px 0 14px;}
-  .site-tally{display:flex; gap:14px; font-size:12px; color:var(--muted); font-family:'JetBrains Mono',monospace;}
+  .site-card p{color:var(--paper-dim); font-size:13.5px; margin:0;}
+  .site-tally{display:flex; gap:14px; font-size:12px; color:var(--muted); font-family:'JetBrains Mono',monospace; margin-top:auto;}
   .site-tally b{color:var(--paper);}
+
+  /* ===== topic modal ===== */
+  .modal-overlay{
+    position:fixed; inset:0; z-index:100;
+    background:rgba(5,10,16,0.72); backdrop-filter:blur(3px);
+    display:flex; align-items:center; justify-content:center; padding:20px;
+  }
+  .modal-overlay.hidden{display:none;}
+  .modal{
+    background:var(--ink-2); border:1px solid var(--line); border-radius:8px;
+    max-width:660px; width:100%; max-height:86vh; overflow:auto;
+    padding:26px 26px 24px; position:relative;
+    box-shadow:0 24px 60px rgba(0,0,0,.5);
+  }
+  .modal-close{
+    position:absolute; top:14px; right:14px; background:var(--ink-3); border:1px solid var(--line);
+    color:var(--muted); width:32px; height:32px; border-radius:4px; cursor:pointer;
+    font-size:17px; line-height:1;
+  }
+  .modal-close:hover{color:var(--paper); border-color:var(--cyan-dim);}
+  .modal-top{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px;}
+  .modal-title{font-size:22px; color:var(--paper); padding-right:36px;}
+  .modal-about{color:var(--paper-dim); font-size:14.5px; line-height:1.65; margin:12px 0 0;}
+  .modal-subs{display:flex; flex-wrap:wrap; gap:6px; align-items:center; margin-top:16px;}
+  .modal-subs-lbl{font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--muted); letter-spacing:.1em;}
+  .modal-sub{font-size:11px; font-family:'JetBrains Mono',monospace; color:var(--paper-dim); border:1px dashed var(--line); border-radius:12px; padding:3px 9px;}
+  .modal-sub.active{color:var(--ink); background:var(--cyan); border-style:solid; border-color:var(--cyan);}
+  .modal-res-h{margin:20px 0 10px; font-size:12px; color:var(--muted); font-family:'JetBrains Mono',monospace; letter-spacing:.08em;}
+  .modal-res.m-res li{font-size:13.5px;}
+  .modal-res a{color:var(--paper-dim);}
 
   footer{
     max-width:1100px; margin:0 auto; padding:30px 28px 60px; color:var(--muted); font-size:12.5px;
@@ -235,11 +337,15 @@
   }
   footer .legend{display:flex; gap:20px; margin-bottom:14px; flex-wrap:wrap;}
   footer .legend span{display:flex; align-items:center; gap:6px;}
+  footer .foot-gh{margin-top:16px;}
+  footer .foot-gh a{color:var(--cyan); text-decoration:none; border-bottom:1px solid var(--cyan-dim);}
+  footer .foot-gh a:hover{border-color:var(--cyan);}
 
   @media (max-width:640px){
     header{flex-wrap:wrap; padding:12px 16px;}
-    .search-wrap{width:100%; margin-left:0;}
+    .search-wrap{width:100%; margin-left:0; order:5;}
     #search{width:100%;}
+    .gh-link{margin-left:auto;}
     .hero{padding:40px 16px 24px;}
     .toolbar,.level-rail,main,footer{padding-left:16px; padding-right:16px;}
   }
@@ -250,20 +356,27 @@
 <div class="blueprint-bg"></div>
 
 <header>
-  <div class="brand"><span class="dot">◆</span>System Design Atlas<small class="mono">v0.1</small></div>
+  <div class="brand"><span class="dot">◆</span>System Design Atlas<small class="mono">v0.2</small></div>
   <nav class="tabs">
     <button class="active" data-view="path">Learning Path</button>
-    <button data-view="websites">Websites</button>
+    <button data-view="roadmap">Roadmap</button>
+    <button data-view="resources">Resources</button>
   </nav>
+  <a class="gh-link mono" href="https://github.com/MohitGupta14/SystemDesign" target="_blank" rel="noopener"><span class="gh-ico">⌥</span>github/MohitGupta14</a>
   <div class="search-wrap">
     <input id="search" type="text" placeholder="Search a topic — e.g. bloom filter">
   </div>
 </header>
 
-<div class="hero">
+<div class="hero" id="hero">
   <span class="kicker">FOR ENGINEERS PREPPING SYSTEM DESIGN &amp; LLD</span>
   <h1>Every resource we could find, mapped to one learning path.</h1>
   <p class="lede">Five sites' worth of courses, collapsed into one order: what to learn first, which free lesson covers it best, and where the paid stuff sits if you want to go deeper.</p>
+  <div class="hero-ctas">
+    <a class="primary" href="#" data-jump="roadmap">View the Roadmap</a>
+    <a href="#" data-jump="path">Browse the Learning Path</a>
+    <a href="#" data-jump="resources">See the Sources</a>
+  </div>
   <div class="stats-row">
     <div class="stat"><b id="stat-topics">–</b><span>canonical topics</span></div>
     <div class="stat"><b id="stat-free">–</b><span>free resources linked</span></div>
@@ -276,7 +389,7 @@
   </div>
 </div>
 
-<div class="toolbar">
+<div class="toolbar" id="toolbar">
   <button class="chip active" data-filter="all">All</button>
   <button class="chip" data-filter="free">Free only</button>
   <button class="chip" data-filter="paid">Paid only</button>
@@ -292,16 +405,37 @@
 <div class="level-rail" id="level-rail"></div>
 
 <main>
-  <div id="path-view"></div>
+  <section id="path-view" class="view active"></section>
 
-  <div id="websites-view">
-    <div class="level-head" style="margin-top:8px;">
+  <section id="roadmap-view" class="view">
+    <div class="view-head">
+      <span class="lvl-num mono">ROADMAP</span>
+      <h2>System Design from zero to job-ready</h2>
+      <p>A top-to-bottom graph of everything on this site. Click any node to see what the topic covers and which resources explain it. Some nodes have sub-nodes — the smaller dashed chips — that flag specific sub-topics worth learning.</p>
+    </div>
+    <div class="r-hint">⌘ Click a node (or a sub-node) to open its topic card. Levels flow top → bottom.</div>
+    <div class="roadmap-track" id="roadmap-track"></div>
+  </section>
+
+  <section id="resources-view" class="view">
+    <div class="view-head">
       <span class="lvl-num mono">SOURCES</span>
       <h2>The sites this was built from</h2>
+      <p>Every link on this page came from one of these five. Browse a site directly if you'd rather stay in its structure.</p>
     </div>
-    <p class="level-desc">Every link on this page came from one of these five. Browse a site directly if you'd rather stay in its structure.</p>
     <div class="site-grid" id="site-grid"></div>
-  </div>
+    <footer>
+      <div class="legend">
+        <span><span class="pill free">FREE</span> no paywall found</span>
+        <span><span class="pill paid">PAID</span> behind a paywall</span>
+        <span><span class="pill unknown">?</span> access unclear from source</span>
+        <span><span class="rec-star">★</span> our pick for that topic</span>
+        <span><span class="tilde">~</span> URL reconstructed from the site's pattern, not confirmed on the page</span>
+      </div>
+      <div>Free/paid status reflects what was visible on each site at collection time and can change — check the source before you commit an evening to it.</div>
+      <div class="foot-gh">Built &amp; maintained by <a href="https://github.com/MohitGupta14/SystemDesign" target="_blank" rel="noopener">Mohit Gupta · github.com/MohitGupta14/SystemDesign</a></div>
+    </footer>
+  </section>
 </main>
 
 <footer>
@@ -313,7 +447,15 @@
     <span><span class="tilde">~</span> URL reconstructed from the site's pattern, not confirmed on the page</span>
   </div>
   <div>Free/paid status reflects what was visible on each site at collection time and can change — check the source before you commit an evening to it.</div>
+  <div class="foot-gh">Built &amp; maintained by <a href="https://github.com/MohitGupta14/SystemDesign" target="_blank" rel="noopener">Mohit Gupta · github.com/MohitGupta14/SystemDesign</a></div>
 </footer>
+
+<div id="topic-modal" class="modal-overlay hidden">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <button class="modal-close" id="modal-close" aria-label="Close">✕</button>
+    <div id="modal-body"></div>
+  </div>
+</div>
 
 <script>
 /* ============================================================
@@ -327,12 +469,20 @@ const LEVELS = [
   desc:"If these feel shaky, system design will feel like magic instead of engineering. Skim, don't linger.",
   topics:[
     {name:"Networking Essentials (HTTP, DNS, TCP)", difficulty:"Beginner", category:"HLD",
+      about:"How machines find and talk to each other: the request/response model, name resolution, and reliable transport.",
+      sub:["HTTP","DNS","TCP"],
       resources:[ R("Hello Interview","Networking Essentials","https://www.hellointerview.com/learn/system-design/core-concepts/networking-essentials","free") ]},
     {name:"API Design", difficulty:"Beginner", category:"HLD",
+      about:"Designing the interfaces systems expose to each other: verbs, status codes, contracts, and versioning.",
+      sub:["REST","gRPC","GraphQL"],
       resources:[ R("Hello Interview","API Design","https://www.hellointerview.com/learn/system-design/core-concepts/api-design","free") ]},
     {name:"Data Modeling", difficulty:"Beginner", category:"HLD",
+      about:"Shaping your data before you store it: entities, relationships, keys, and the read patterns they serve.",
+      sub:["Entities & Relations","Keys","Access Patterns"],
       resources:[ R("Hello Interview","Data Modeling","https://www.hellointerview.com/learn/system-design/core-concepts/data-modeling","free") ]},
     {name:"SQL vs NoSQL", difficulty:"Beginner", category:"HLD",
+      about:"Choosing a storage engine by consistency, flexibility, and the shape of your queries.",
+      sub:["SQL","NoSQL","When Each Wins"],
       resources:[ R("DesignGurus","SQL vs. NoSQL","https://www.designgurus.io/course-play/grokking-the-system-design-interview/doc/sql-vs-nosql","paid","reconstructed") ]},
   ]
 },
@@ -341,25 +491,38 @@ const LEVELS = [
   desc:"The vocabulary every later topic assumes you already have: how systems talk, scale, and stay up.",
   topics:[
     {name:"Client-Server Architecture", difficulty:"Beginner", category:"HLD",
+      about:"The workhorse topology: clients make requests, servers respond with results.",
       resources:[ R("HLD Mastery","Client-Server Architecture","https://hldmastery.com/learn/client-server-architecture","free","reconstructed") ]},
     {name:"Scalability", difficulty:"Beginner", category:"HLD",
+      about:"Growing capacity without redesigning: add more resources to one box, or split the work across many.",
+      sub:["Vertical Scaling","Horizontal Scaling","Load Balancing"],
       resources:[ R("HLD Mastery","Scalability","https://hldmastery.com/learn/scalability","free","reconstructed"),
                   R("ByteByteGo","Scale From Zero To Millions Of Users","https://bytebytego.com/courses/system-design-interview/scale-from-zero-to-millions-of-users","free") ]},
     {name:"Availability", difficulty:"Beginner", category:"HLD",
+      about:"The percentage of time a system actually works, achieved with redundancy and failover.",
+      sub:["High Availability","Failover","SLAs"],
       resources:[ R("HLD Mastery","Availability","https://hldmastery.com/learn/availability","free","reconstructed") ]},
     {name:"Reliability", difficulty:"Beginner", category:"HLD",
+      about:"Staying correct under faults; it is about tolerating failures, not avoiding them entirely.",
       resources:[ R("HLD Mastery","Reliability","https://hldmastery.com/learn/reliability","paid","reconstructed") ]},
     {name:"Latency, Throughput &amp; Bandwidth", difficulty:"Beginner", category:"HLD",
+      about:"Three numbers that define performance: delay per request, work per second, and link capacity.",
       resources:[ R("HLD Mastery","Latency vs Throughput vs Bandwidth","https://hldmastery.com/learn/latency-throughput-bandwidth","free","reconstructed") ]},
     {name:"Back-of-the-Envelope Estimation", difficulty:"Beginner", category:"HLD",
+      about:"Rough arithmetic to sanity-check a design early: QPS, storage, and cache sizes without a calculator.",
       resources:[ R("ByteByteGo","Back-of-the-envelope Estimation","https://bytebytego.com/courses/system-design-interview/back-of-the-envelope-estimation","free"),
-                  R("DesignGurus","What are Back-of-the-Envelope Estimations?","https://www.designgurus.io/course-play/grokking-the-system-design-interview/doc/what-are-back-of-the-envelope-estimations","free","reconstructed") ]},
+                  R("DesignGurus","What are Back-of-the-Envelope Estimations?","https://www.designgurus.io/course-play/grokking-the-system-design-interview/doc/what-are-backoftheenvelope-estimations","free","reconstructed") ]},
     {name:"Caching", difficulty:"Beginner", category:"HLD",
+      about:"Storing hot data closer to the reader to slash latency and take pressure off the database.",
+      sub:["Cache-Aside","Write-Through","TTL & Eviction"],
       resources:[ R("Hello Interview","Caching","https://www.hellointerview.com/learn/system-design/core-concepts/caching","free") ]},
     {name:"Database Indexing", difficulty:"Beginner", category:"HLD",
+      about:"Extra lookup structures that turn full table scans into fast point reads.",
       resources:[ R("Hello Interview","Database Indexing","https://www.hellointerview.com/learn/system-design/core-concepts/db-indexing","free"),
                   R("DesignGurus","Indexes","https://www.designgurus.io/course-play/grokking-the-system-design-interview/doc/indexes","paid","reconstructed") ]},
     {name:"A Framework for System Design Interviews", difficulty:"Beginner", category:"HLD",
+      about:"The skeleton every good answer follows: clarify, estimate, design APIs and data, then deep-dive.",
+      sub:["Clarify","Estimate","Design","Deep Dive"],
       resources:[ R("ByteByteGo","A Framework For System Design Interviews","https://bytebytego.com/courses/system-design-interview/a-framework-for-system-design-interviews","free"),
                   R("DesignGurus","System Design Master Template","https://www.designgurus.io/course-play/grokking-the-system-design-interview/doc/system-design-master-template","free","reconstructed"),
                   R("Hello Interview","Delivery Framework","https://www.hellointerview.com/learn/system-design/in-a-hurry/delivery","free") ]},
@@ -370,42 +533,62 @@ const LEVELS = [
   desc:"How data spreads across machines, and how those machines agree on what's true.",
   topics:[
     {name:"Sharding / Data Partitioning", difficulty:"Intermediate", category:"HLD",
+      about:"Splitting data across machines so no single node becomes a hot row or a bottleneck.",
+      sub:["Hash Sharding","Range Sharding","Rebalancing"],
       resources:[ R("Hello Interview","Sharding","https://www.hellointerview.com/learn/system-design/core-concepts/sharding","free"),
                   R("DesignGurus","Data Partitioning","https://www.designgurus.io/course-play/grokking-the-system-design-interview/doc/data-partitioning","paid","reconstructed") ]},
     {name:"Consistent Hashing", difficulty:"Intermediate", category:"HLD",
+      about:"A hash ring that keeps key movement minimal when nodes are added or removed.",
+      sub:["Hash Ring","Virtual Nodes","Skew"],
       resources:[ R("Hello Interview","Consistent Hashing","https://www.hellointerview.com/learn/system-design/core-concepts/consistent-hashing","free"),
                   R("ByteByteGo","Design Consistent Hashing","https://bytebytego.com/courses/system-design-interview/design-consistent-hashing","free"),
-                  R("DesignGurus","Consistent Hashing","https://www.designgurus.io/course-play/grokking-the-system-design-interview/doc/consistent-hashing","paid","reconstructed") ]},
+                  R("DesignGurus","Consistent Hashing","https://www.designgurus.io/course-play/grokking-the-system-design-interview/doc/consistent-hashing-new","paid","reconstructed") ]},
     {name:"Replication", difficulty:"Intermediate", category:"HLD",
+      about:"Copying data to multiple nodes so one copy failing is not the whole story ending.",
       resources:[ R("DesignGurus","Redundancy and Replication","https://www.designgurus.io/course-play/grokking-the-system-design-interview/doc/redundancy-and-replication","paid","reconstructed") ]},
     {name:"CAP Theorem", difficulty:"Intermediate", category:"HLD",
+      about:"When the network partitions you get to pick consistency or availability, not both.",
+      sub:["Consistency","Availability","Partition Tolerance"],
       resources:[ R("Hello Interview","CAP Theorem","https://www.hellointerview.com/learn/system-design/core-concepts/cap-theorem","free"),
                   R("DesignGurus","CAP Theorem","https://www.designgurus.io/course-play/grokking-the-system-design-interview/doc/cap-theorem","paid","reconstructed") ]},
     {name:"PACELC Theorem", difficulty:"Advanced", category:"HLD",
-      resources:[ R("DesignGurus","PACELC Theorem","https://www.designgurus.io/course-play/grokking-the-system-design-interview/doc/pacelc-theorem","paid","reconstructed") ]},
+      about:"CAP extended: even with no partition, you still trade latency against consistency.",
+      resources:[ R("DesignGurus","PACELC Theorem","https://www.designgurus.io/course-play/grokking-the-system-design-interview/doc/pacelc-theorem-new","paid","reconstructed") ]},
     {name:"Quorum", difficulty:"Intermediate", category:"HLD",
-      resources:[ R("DesignGurus","Quorum","https://www.designgurus.io/course-play/grokking-the-system-design-interview/doc/quorum","paid","reconstructed") ]},
+      about:"A majority of replicas must agree (W+R > N) so reads always see the latest write.",
+      resources:[ R("DesignGurus","Quorum","https://www.designgurus.io/course-play/grokking-the-system-design-interview/doc/quorum-new","paid","reconstructed") ]},
     {name:"Leader &amp; Follower / Leader Election", difficulty:"Intermediate", category:"HLD",
-      resources:[ R("DesignGurus","Leader and Follower","https://www.designgurus.io/course-play/grokking-the-system-design-interview/doc/leader-and-follower","paid","reconstructed") ]},
+      about:"One node writes, many nodes read; election keeps a replacement ready when it dies.",
+      resources:[ R("DesignGurus","Leader and Follower","https://www.designgurus.io/course-play/grokking-the-system-design-interview/doc/leader-and-follower-new","paid","reconstructed") ]},
     {name:"Heartbeats", difficulty:"Intermediate", category:"HLD",
-      resources:[ R("DesignGurus","Heartbeat","https://www.designgurus.io/course-play/grokking-the-system-design-interview/doc/heartbeat","paid","reconstructed") ]},
+      about:"Periodic pings that answer the only question that matters: is that node still alive?",
+      resources:[ R("DesignGurus","Heartbeat","https://www.designgurus.io/course-play/grokking-the-system-design-interview/doc/heartbeat-new","paid","reconstructed") ]},
     {name:"Checksums", difficulty:"Intermediate", category:"HLD",
-      resources:[ R("DesignGurus","Checksum","https://www.designgurus.io/course-play/grokking-the-system-design-interview/doc/checksum","paid","reconstructed") ]},
+      about:"Small digests that catch corrupted data while it is in transit or at rest.",
+      resources:[ R("DesignGurus","Checksum","https://www.designgurus.io/course-play/grokking-the-system-design-interview/doc/checksum-new","paid","reconstructed") ]},
     {name:"Bloom Filters", difficulty:"Intermediate", category:"HLD",
+      about:"A compact 'definitely not / maybe yes' set check that saves a page of disk reads.",
       resources:[ R("DesignGurus","Bloom Filters","https://www.designgurus.io/course-play/grokking-the-system-design-interview/doc/bloom-filters","paid","reconstructed"),
                   R("HLD Mastery","Bloom Filter","https://hldmastery.com/learn/bloom-filter","unknown","reconstructed") ]},
     {name:"Message Queues &amp; Kafka", difficulty:"Intermediate", category:"HLD",
+      about:"Asynchronous hand-off between producers and consumers so services never have to wait on each other.",
+      sub:["Producer","Consumer","Topics & Partitions"],
       resources:[ R("Hello Interview","Kafka","https://www.hellointerview.com/learn/system-design/deep-dives/kafka","free"),
                   R("ByteByteGo","Distributed Message Queue","https://bytebytego.com/courses/system-design-interview/distributed-message-queue","paid") ]},
     {name:"Unique ID Generation", difficulty:"Intermediate", category:"HLD",
+      about:"Globally unique, often sortable IDs without a single serial sequence as the bottleneck.",
       resources:[ R("ByteByteGo","Design A Unique ID Generator In Distributed Systems","https://bytebytego.com/courses/system-design-interview/design-a-unique-id-generator-in-distributed-systems","paid","reconstructed") ]},
     {name:"Key-Value Stores", difficulty:"Intermediate", category:"HLD",
+      about:"Simple get/put systems that scale out with partitioning and replication.",
       resources:[ R("ByteByteGo","Design A Key-value Store","https://bytebytego.com/courses/system-design-interview/design-a-key-value-store","free") ]},
     {name:"Rate Limiting", difficulty:"Intermediate", category:"HLD",
+      about:"Throttling how many requests a client can make per window to protect the system.",
+      sub:["Token Bucket","Leaky Bucket","Sliding Window"],
       resources:[ R("ByteByteGo","Design A Rate Limiter","https://bytebytego.com/courses/system-design-interview/design-a-rate-limiter","free"),
                   R("Hello Interview","Rate Limiter","https://www.hellointerview.com/learn/system-design/problem-breakdowns/distributed-rate-limiter","free") ]},
     {name:"Long-Polling vs WebSockets vs SSE", difficulty:"Intermediate", category:"HLD",
-      resources:[ R("DesignGurus","Long-Polling vs WebSockets vs Server-Sent Events","https://www.designgurus.io/course-play/grokking-the-system-design-interview/doc/long-polling-vs-websockets-vs-server-sent-events","paid","reconstructed") ]},
+      about:"Three ways to push data server-to-client, each with a different latency and load profile.",
+      resources:[ R("DesignGurus","Long-Polling vs WebSockets vs Server-Sent Events","https://www.designgurus.io/course-play/grokking-the-system-design-interview/doc/longpolling-vs-websockets-vs-serversent-events","paid","reconstructed") ]},
   ]
 },
 {
@@ -413,32 +596,46 @@ const LEVELS = [
   desc:"Recurring shapes that show up across almost every real-world design — learn the pattern once, spot it everywhere.",
   topics:[
     {name:"Scaling Reads", difficulty:"Intermediate", category:"Pattern",
+      about:"Replicas, caches, and CDNs: hand more readers the same data without burning your primary.",
       resources:[ R("Hello Interview","Scaling Reads","https://www.hellointerview.com/learn/system-design/patterns/scaling-reads","paid") ]},
     {name:"Scaling Writes", difficulty:"Intermediate", category:"Pattern",
+      about:"Partitioning and append-only tricks so writes never collide on a single hot row.",
       resources:[ R("Hello Interview","Scaling Writes","https://www.hellointerview.com/learn/system-design/patterns/scaling-writes","paid") ]},
     {name:"Real-time Updates", difficulty:"Intermediate", category:"Pattern",
+      about:"WebSockets, SSE, or polling to keep a page fresh without reloading it.",
       resources:[ R("Hello Interview","Real-time Updates","https://www.hellointerview.com/learn/system-design/patterns/realtime-updates","paid") ]},
     {name:"Dealing with Contention", difficulty:"Advanced", category:"Pattern",
+      about:"Locks, queues, and idempotency for when many users fight over the same resource.",
       resources:[ R("Hello Interview","Dealing with Contention","https://www.hellointerview.com/learn/system-design/patterns/dealing-with-contention","paid") ]},
     {name:"Multi-step Processes / Workflows", difficulty:"Intermediate", category:"Pattern",
+      about:"Long operations broken into durable, resumable steps that survive crashes.",
       resources:[ R("Hello Interview","Multi-step Processes","https://www.hellointerview.com/learn/system-design/patterns/multi-step-processes","paid") ]},
     {name:"Managing Long-Running Tasks", difficulty:"Intermediate", category:"Pattern",
+      about:"Offloading heavy work to background workers with progress tracking and retries.",
       resources:[ R("Hello Interview","Managing Long Running Tasks","https://www.hellointerview.com/learn/system-design/patterns/long-running-tasks","paid") ]},
     {name:"Handling Large Blobs", difficulty:"Intermediate", category:"Pattern",
+      about:"Streaming and object storage for files too big for a database row.",
       resources:[ R("Hello Interview","Handling Large Blobs","https://www.hellointerview.com/learn/system-design/patterns/large-blobs","paid") ]},
     {name:"API Gateway", difficulty:"Intermediate", category:"HLD",
+      about:"A single front door for auth, routing, throttling, and request aggregation.",
       resources:[ R("Hello Interview","API Gateway","https://www.hellointerview.com/learn/system-design/deep-dives/api-gateway","free") ]},
     {name:"Redis Deep Dive", difficulty:"Intermediate", category:"HLD",
+      about:"An in-memory data store pulling duty as cache, queue, and pub/sub bus.",
       resources:[ R("Hello Interview","Redis","https://www.hellointerview.com/learn/system-design/deep-dives/redis","free") ]},
     {name:"Elasticsearch Deep Dive", difficulty:"Intermediate", category:"HLD",
+      about:"A search engine built on inverted indexes, shards, and near-real-time indexing.",
       resources:[ R("Hello Interview","Elasticsearch","https://www.hellointerview.com/learn/system-design/deep-dives/elasticsearch","free") ]},
     {name:"Cassandra Deep Dive", difficulty:"Intermediate", category:"HLD",
+      about:"A write-optimized, decentralized wide-column store with no single point of failure.",
       resources:[ R("Hello Interview","Cassandra","https://www.hellointerview.com/learn/system-design/deep-dives/cassandra","free") ]},
     {name:"DynamoDB Deep Dive", difficulty:"Intermediate", category:"HLD",
+      about:"AWS's managed key-value and document database, built on partition + sort keys.",
       resources:[ R("Hello Interview","DynamoDB","https://www.hellointerview.com/learn/system-design/deep-dives/dynamodb","free") ]},
     {name:"PostgreSQL Deep Dive", difficulty:"Intermediate", category:"HLD",
+      about:"The relational workhorse: ACID transactions, rich indexes, and a deep extension ecosystem.",
       resources:[ R("Hello Interview","PostgreSQL","https://www.hellointerview.com/learn/system-design/deep-dives/postgres","paid") ]},
     {name:"Flink Deep Dive", difficulty:"Advanced", category:"HLD",
+      about:"A stream processor built for event-time analytics across millions of events per second.",
       resources:[ R("Hello Interview","Flink","https://www.hellointerview.com/learn/system-design/deep-dives/flink","paid") ]},
   ]
 },
@@ -447,92 +644,135 @@ const LEVELS = [
   desc:"Ordered so each design leans on the last — start with a URL shortener, end somewhere like ChatGPT.",
   topics:[
     {name:"URL Shortener", difficulty:"Beginner", category:"Case Study",
+      about:"Turn a long URL into a tiny token: encode the ID, cache it, redirect on arrival.",
+      sub:["Encoding","Collision Handling","Redirect & 302"],
       resources:[ R("ByteByteGo","Design A URL Shortener","https://bytebytego.com/courses/system-design-interview/design-a-url-shortener","free"),
                   R("Hello Interview","Bitly","https://www.hellointerview.com/learn/system-design/problem-breakdowns/bitly","free") ]},
     {name:"Web Crawler", difficulty:"Beginner", category:"Case Study",
+      about:"Discover and fetch pages at scale; politeness, dedup, and re-crawl policy matter.",
       resources:[ R("ByteByteGo","Design A Web Crawler","https://bytebytego.com/courses/system-design-interview/design-a-web-crawler","free"),
                   R("Hello Interview","Web Crawler","https://www.hellointerview.com/learn/system-design/problem-breakdowns/web-crawler","free") ]},
     {name:"Notification System", difficulty:"Intermediate", category:"Case Study",
+      about:"Fan messages out to push, email, and SMS with retries and per-channel templates.",
       resources:[ R("ByteByteGo","Design A Notification System","https://bytebytego.com/courses/system-design-interview/design-a-notification-system","paid","reconstructed"),
                   R("Hello Interview","Notification System","https://www.hellointerview.com/learn/system-design/problem-breakdowns/notification-system","paid") ]},
     {name:"Local Delivery Service (Gopuff-style)", difficulty:"Intermediate", category:"Case Study",
+      about:"Micro-fulfillment: keep stock close, match couriers, and promise fast ETAs.",
       resources:[ R("Hello Interview","Local Delivery Service","https://www.hellointerview.com/learn/system-design/problem-breakdowns/gopuff","free") ]},
     {name:"Chat System", difficulty:"Intermediate", category:"Case Study",
+      about:"Persistent conversations: presence, inbox threading, and reliable delivery receipts.",
+      sub:["Presence","Inbox","Message Delivery"],
       resources:[ R("ByteByteGo","Design A Chat System","https://bytebytego.com/courses/system-design-interview/design-a-chat-system","free"),
                   R("Hello Interview","WhatsApp","https://www.hellointerview.com/learn/system-design/problem-breakdowns/whatsapp","free") ]},
     {name:"News Feed", difficulty:"Intermediate", category:"Case Study",
+      about:"Assemble a ranked, personalized stream fast enough to keep scrolling.",
+      sub:["Fan-out on Write","Fan-out on Read"],
       resources:[ R("ByteByteGo","Design A News Feed System","https://bytebytego.com/courses/system-design-interview/design-a-news-feed-system","free","reconstructed"),
                   R("Hello Interview","FB News Feed","https://www.hellointerview.com/learn/system-design/problem-breakdowns/fb-news-feed","free") ]},
     {name:"YouTube", difficulty:"Intermediate", category:"Case Study",
+      about:"Video upload, transcoding, and CDN-backed playback without buffering.",
+      sub:["Upload Pipeline","Transcoding","CDN & Playback"],
       resources:[ R("ByteByteGo","Design YouTube","https://bytebytego.com/courses/system-design-interview/design-youtube","free"),
                   R("Hello Interview","YouTube","https://www.hellointerview.com/learn/system-design/problem-breakdowns/youtube","free"),
                   R("Hello Interview","YouTube Top K","https://www.hellointerview.com/learn/system-design/problem-breakdowns/top-k","free") ]},
     {name:"Ticketmaster", difficulty:"Intermediate", category:"Case Study",
+      about:"Bursts of concurrent purchases for high-demand events without overselling.",
       resources:[ R("Hello Interview","Ticketmaster","https://www.hellointerview.com/learn/system-design/problem-breakdowns/ticketmaster","free") ]},
     {name:"Uber", difficulty:"Intermediate", category:"Case Study",
+      about:"Match riders and drivers using location-aware search and real-time updates.",
+      sub:["Driver Matching","Location Index","Ride Lifecycle"],
       resources:[ R("Hello Interview","Uber","https://www.hellointerview.com/learn/system-design/problem-breakdowns/uber","free") ]},
     {name:"Tinder", difficulty:"Intermediate", category:"Case Study",
+      about:"Geo-proximity matching and fast, low-write swipe-state storage.",
       resources:[ R("Hello Interview","Tinder","https://www.hellointerview.com/learn/system-design/problem-breakdowns/tinder","free") ]},
     {name:"Dropbox", difficulty:"Intermediate", category:"Case Study",
+      about:"File sync: chunk files, dedupe blocks, and propagate tiny diffs to every device.",
       resources:[ R("Hello Interview","Dropbox","https://www.hellointerview.com/learn/system-design/problem-breakdowns/dropbox","free") ]},
     {name:"Hotel Reservation System", difficulty:"Intermediate", category:"Case Study",
+      about:"Inventory that must never oversell the same room, even under concurrent booking.",
       resources:[ R("ByteByteGo","Hotel Reservation System","https://bytebytego.com/courses/system-design-interview/hotel-reservation-system","free","reconstructed") ]},
     {name:"Ad Click Event Aggregation", difficulty:"Advanced", category:"Case Study",
+      about:"Count billions of clicks and impressions with bounded latency and exactly-right totals.",
       resources:[ R("ByteByteGo","Ad Click Event Aggregation","https://bytebytego.com/courses/system-design-interview/ad-click-event-aggregation","paid","reconstructed"),
                   R("Hello Interview","Ad Click Aggregator","https://www.hellointerview.com/learn/system-design/problem-breakdowns/ad-click-aggregator","free") ]},
     {name:"FB Live Comments", difficulty:"Advanced", category:"Case Study",
+      about:"Fan millions of hot comments into one live stream, ordered and fast.",
       resources:[ R("Hello Interview","FB Live Comments","https://www.hellointerview.com/learn/system-design/problem-breakdowns/fb-live-comments","free") ]},
     {name:"FB Post Search", difficulty:"Advanced", category:"Case Study",
+      about:"An inverted index over billions of social posts with freshness and ranking.",
       resources:[ R("Hello Interview","FB Post Search","https://www.hellointerview.com/learn/system-design/problem-breakdowns/fb-post-search","free") ]},
     {name:"LeetCode-style Judge", difficulty:"Advanced", category:"Case Study",
+      about:"Run user code in isolated sandboxes, feed test cases, and return a verdict.",
       resources:[ R("Hello Interview","LeetCode","https://www.hellointerview.com/learn/system-design/problem-breakdowns/leetcode","free") ]},
     {name:"Real-time Gaming Leaderboard", difficulty:"Advanced", category:"Case Study",
+      about:"Keep scores ranked and recomputed at game speed across a huge playing field.",
       resources:[ R("ByteByteGo","Real-time Gaming Leaderboard","https://bytebytego.com/courses/system-design-interview/real-time-gaming-leaderboard","free","reconstructed") ]},
     {name:"Search Autocomplete", difficulty:"Advanced", category:"Case Study",
+      about:"Prefix suggestions at type speed using a trie, frequency ranking, and caching.",
       resources:[ R("ByteByteGo","Design A Search Autocomplete System","https://bytebytego.com/courses/system-design-interview/design-a-search-autocomplete-system","paid") ]},
     {name:"Proximity Service / Nearby Friends", difficulty:"Advanced", category:"Case Study",
+      about:"Geohash and spatial indexes answer the question 'who is near me right now?'",
       resources:[ R("ByteByteGo","Proximity Service","https://bytebytego.com/courses/system-design-interview/proximity-service","paid"),
                   R("ByteByteGo","Nearby Friends","https://bytebytego.com/courses/system-design-interview/nearby-friends","paid","reconstructed") ]},
     {name:"Google Maps", difficulty:"Advanced", category:"Case Study",
+      about:"Route planning and ETA computation on a planet-sized road graph.",
       resources:[ R("ByteByteGo","Google Maps","https://bytebytego.com/courses/system-design-interview/google-maps","paid") ]},
     {name:"Google Drive / Dropbox at Scale", difficulty:"Advanced", category:"Case Study",
+      about:"Chunked, deduplicated, synced file storage engineered for billions of users.",
       resources:[ R("ByteByteGo","Design Google Drive","https://bytebytego.com/courses/system-design-interview/design-google-drive","paid") ]},
     {name:"Google Docs", difficulty:"Advanced", category:"Case Study",
+      about:"CRDTs and operational transforms make many users edit one document together.",
       resources:[ R("Hello Interview","Google Docs","https://www.hellointerview.com/learn/system-design/problem-breakdowns/google-docs","paid") ]},
     {name:"Instagram", difficulty:"Advanced", category:"Case Study",
+      about:"Media ingestion plus a personalized social feed at planetary scale.",
       resources:[ R("Hello Interview","Instagram","https://www.hellointerview.com/learn/system-design/problem-breakdowns/instagram","paid") ]},
     {name:"Yelp", difficulty:"Advanced", category:"Case Study",
+      about:"Spatial search over geolocated businesses with reviews and personalization.",
       resources:[ R("Hello Interview","Yelp","https://www.hellointerview.com/learn/system-design/problem-breakdowns/yelp","paid") ]},
     {name:"Strava", difficulty:"Advanced", category:"Case Study",
+      about:"Ingest GPS tracks from millions of athletes and analyze them into stats.",
       resources:[ R("Hello Interview","Strava","https://www.hellointerview.com/learn/system-design/problem-breakdowns/strava","paid") ]},
     {name:"News Aggregator (Reddit-style)", difficulty:"Advanced", category:"Case Study",
+      about:"Ingest articles from everywhere, then rank and personalize a front page.",
       resources:[ R("Hello Interview","News Aggregator","https://www.hellointerview.com/learn/system-design/problem-breakdowns/google-news","paid") ]},
     {name:"Price Tracking Service", difficulty:"Advanced", category:"Case Study",
+      about:"Crawl and diff prices over time, then alert when a target threshold is crossed.",
       resources:[ R("Hello Interview","Price Tracking Service","https://www.hellointerview.com/learn/system-design/problem-breakdowns/camelcamelcamel","paid") ]},
     {name:"Distributed Cache", difficulty:"Advanced", category:"Case Study",
+      about:"A cache that lives across many machines: consistent hashing, eviction, and failover.",
       resources:[ R("Hello Interview","Distributed Cache","https://www.hellointerview.com/learn/system-design/problem-breakdowns/distributed-cache","paid") ]},
     {name:"Online Auction", difficulty:"Advanced", category:"Case Study",
+      about:"Concurrent bids with strict ordering and sniping protection.",
       resources:[ R("Hello Interview","Online Auction","https://www.hellointerview.com/learn/system-design/problem-breakdowns/online-auction","paid") ]},
     {name:"Job Scheduler", difficulty:"Advanced", category:"Case Study",
+      about:"Cron at scale: durable, distributed scheduling with retries and leader election.",
       resources:[ R("Hello Interview","Job Scheduler","https://www.hellointerview.com/learn/system-design/problem-breakdowns/job-scheduler","paid") ]},
     {name:"Metrics Monitoring &amp; Alerting", difficulty:"Advanced", category:"Case Study",
+      about:"Ingest, store, query, and alert on system telemetry without missing the signal.",
       resources:[ R("ByteByteGo","Metrics Monitoring and Alerting System","https://bytebytego.com/courses/system-design-interview/metrics-monitoring-and-alerting-system","paid"),
                   R("Hello Interview","Metrics Monitoring","https://www.hellointerview.com/learn/system-design/problem-breakdowns/metrics-monitoring","paid") ]},
     {name:"Payment System", difficulty:"Advanced", category:"Case Study",
+      about:"Money movement with exactly-once semantics and reconciliation built in.",
       resources:[ R("ByteByteGo","Payment System","https://bytebytego.com/courses/system-design-interview/payment-system","paid","reconstructed"),
                   R("Hello Interview","Payment System","https://www.hellointerview.com/learn/system-design/problem-breakdowns/payment-system","paid") ]},
     {name:"Digital Wallet", difficulty:"Advanced", category:"Case Study",
+      about:"Balances, a correct ledger, and transfers that never lose or double-spend.",
       resources:[ R("ByteByteGo","Digital Wallet","https://bytebytego.com/courses/system-design-interview/digital-wallet","paid","reconstructed") ]},
     {name:"Stock Exchange / Robinhood", difficulty:"Advanced", category:"Case Study",
+      about:"An order book plus a matching engine running at very low latency.",
       resources:[ R("ByteByteGo","Stock Exchange","https://bytebytego.com/courses/system-design-interview/stock-exchange","paid","reconstructed"),
                   R("Hello Interview","Robinhood","https://www.hellointerview.com/learn/system-design/problem-breakdowns/robinhood","paid") ]},
     {name:"Distributed Email Service", difficulty:"Advanced", category:"Case Study",
+      about:"SMTP in, durable storage, search, and SMTP out for millions of mailboxes.",
       resources:[ R("ByteByteGo","Distributed Email Service","https://bytebytego.com/courses/system-design-interview/distributed-email-service","paid","reconstructed") ]},
     {name:"S3-like Object Storage", difficulty:"Advanced", category:"Case Study",
+      about:"Simple HTTP get/put blobs spread across a fleet of storage nodes.",
       resources:[ R("ByteByteGo","S3-like Object Storage","https://bytebytego.com/courses/system-design-interview/s3-like-object-storage","paid","reconstructed") ]},
     {name:"Online Chess", difficulty:"Advanced", category:"Case Study",
+      about:"Turn-based sync, move validation, and matchmaking over websockets.",
       resources:[ R("Hello Interview","Online Chess","https://www.hellointerview.com/learn/system-design/problem-breakdowns/online-chess","paid") ]},
     {name:"ChatGPT-style System", difficulty:"Advanced", category:"Case Study",
+      about:"Serving a large language model: prompts, token streaming, caching, and cost.",
       resources:[ R("Hello Interview","ChatGPT","https://www.hellointerview.com/learn/system-design/problem-breakdowns/chatgpt","paid") ]},
   ]
 },
@@ -541,6 +781,8 @@ const LEVELS = [
   desc:"The papers and production systems behind the tools you've been name-dropping. Course-level facts only — the site doesn't expose per-topic URLs here yet.",
   topics:[
     {name:"Dynamo, Cassandra, Kafka, Chubby, HDFS, GFS, BigTable", difficulty:"Advanced", category:"HLD",
+      about:"The canonical papers behind today's battle-tested systems: from Dynamo's ring to BigTable's tablets.",
+      sub:["Dynamo","GFS / HDFS","BigTable","Kafka"],
       resources:[ R("DesignGurus","Grokking the System Design Interview, Vol. II — 7 architecture studies","https://www.designgurus.io/course-play/grokking-system-design-interview-ii/doc/course-overview-audience-scope-and-content","unknown") ]},
   ]
 },
@@ -549,32 +791,47 @@ const LEVELS = [
   desc:"Zoom from 'how do machines talk' to 'how do I structure this class.' OOP, SOLID, then the classic LLD interview questions.",
   topics:[
     {name:"What is an OOD Interview", difficulty:"Beginner", category:"LLD",
+      about:"Here you are designing classes and behavior, not infrastructure or APIs.",
       resources:[ R("ByteByteGo","What is an Object-Oriented Design Interview","https://bytebytego.com/courses/object-oriented-design-interview/what-is-an-object-oriented-design-interview","free") ]},
     {name:"A Framework for the OOD Interview", difficulty:"Beginner", category:"LLD",
+      about:"Collect requirements, define classes, wire relationships, then write the key methods.",
       resources:[ R("ByteByteGo","A Framework for the OOD Interview","https://bytebytego.com/courses/object-oriented-design-interview/a-framework-for-the-ood-interview","free") ]},
     {name:"OOP Fundamentals", difficulty:"Beginner", category:"LLD",
+      about:"Encapsulation, inheritance, polymorphism, and abstraction — the four pillars.",
       resources:[ R("ByteByteGo","OOP Fundamentals","https://bytebytego.com/courses/object-oriented-design-interview/oop-fundamentals","paid","reconstructed") ]},
     {name:"Parking Lot", difficulty:"Intermediate", category:"LLD",
+      about:"Model floors, spots, and ticketing; assign the right spot to the right vehicle.",
+      sub:["Spot Assignment","Pricing","Floor Model"],
       resources:[ R("ByteByteGo","Design a Parking Lot","https://bytebytego.com/courses/object-oriented-design-interview/design-a-parking-lot","free") ]},
     {name:"Vending Machine", difficulty:"Intermediate", category:"LLD",
+      about:"The purchase flow as a state machine: money in, selection, dispense, change.",
       resources:[ R("ByteByteGo","Design a Vending Machine","https://bytebytego.com/courses/object-oriented-design-interview/design-a-vending-machine","paid","reconstructed") ]},
     {name:"ATM", difficulty:"Intermediate", category:"LLD",
+      about:"PIN verification, account operations, and cash dispensing under a constrained UI.",
       resources:[ R("ByteByteGo","Design an ATM System","https://bytebytego.com/courses/object-oriented-design-interview/design-an-automated-teller-machine-atm","paid","reconstructed") ]},
     {name:"Elevator System", difficulty:"Intermediate", category:"LLD",
+      about:"Optimal car scheduling, button handling, and door coordination inside a shaft.",
       resources:[ R("ByteByteGo","Design an Elevator System","https://bytebytego.com/courses/object-oriented-design-interview/design-an-elevator-system","paid","reconstructed") ]},
     {name:"Tic Tac Toe", difficulty:"Intermediate", category:"LLD",
+      about:"Board state, win detection, and player turn logic in one small model.",
       resources:[ R("ByteByteGo","Design a Tic Tac Toe Game","https://bytebytego.com/courses/object-oriented-design-interview/design-a-tic-tac-toe-game","paid","reconstructed") ]},
     {name:"Blackjack", difficulty:"Intermediate", category:"LLD",
+      about:"Cards, hands, dealer rules, and bet settlement.",
       resources:[ R("ByteByteGo","Design a Blackjack Game","https://bytebytego.com/courses/object-oriented-design-interview/design-a-blackjack-game","paid","reconstructed") ]},
     {name:"Movie Ticket Booking", difficulty:"Advanced", category:"LLD",
+      about:"Shows, seat maps, reservations, and payments in one workflow.",
       resources:[ R("ByteByteGo","Design a Movie Ticket Booking System","https://bytebytego.com/courses/object-oriented-design-interview/movie-ticket-booking-system","paid","reconstructed") ]},
     {name:"Restaurant Management", difficulty:"Advanced", category:"LLD",
+      about:"Tables, orders, kitchen tickets, and billing flowing through a restaurant.",
       resources:[ R("ByteByteGo","Design a Restaurant Management System","https://bytebytego.com/courses/object-oriented-design-interview/design-a-restaurant-management-system","paid","reconstructed") ]},
     {name:"Grocery Store System", difficulty:"Advanced", category:"LLD",
+      about:"Carts, inventory, and checkout lanes as a single coherent model.",
       resources:[ R("ByteByteGo","Design a Grocery Store System","https://bytebytego.com/courses/object-oriented-design-interview/grocery-store-system","paid","reconstructed") ]},
     {name:"Shipping Locker System", difficulty:"Advanced", category:"LLD",
+      about:"Lockers, package-to-locker assignment, and one-time retrieval codes.",
       resources:[ R("ByteByteGo","Design a Shipping Locker System","https://bytebytego.com/courses/object-oriented-design-interview/design-a-shipping-locker","paid","reconstructed") ]},
     {name:"Unix File Search", difficulty:"Advanced", category:"LLD",
+      about:"Composite and predicate patterns to filter files by size, extension, or name.",
       resources:[ R("ByteByteGo","Design a Unix File Search System","https://bytebytego.com/courses/object-oriented-design-interview/design-a-unix-file-search","paid","reconstructed") ]},
   ]
 },
@@ -583,6 +840,7 @@ const LEVELS = [
   desc:"Thin coverage so far — one confirmed page. Worth pairing with a proper Gang-of-Four reference until more sources are added.",
   topics:[
     {name:"Facade Pattern", difficulty:"Intermediate", category:"Pattern",
+      about:"One simple interface that hides a messy set of subsystems behind it.",
       resources:[ R("LowLevelDesignMastery","Facade Pattern","https://www.lowleveldesignmastery.com/design-patterns/structural/05-facade-pattern/","unknown") ]},
   ]
 },
@@ -638,7 +896,7 @@ function renderPath(){
 
   let visibleCount = 0, totalTopics = 0, totalFree = 0;
 
-  LEVELS.forEach(level => {
+  LEVELS.forEach((level, li) => {
     totalTopics += level.topics.length;
     const visibleTopics = level.topics.filter(topicMatchesFilters);
     visibleCount += visibleTopics.length;
@@ -656,11 +914,13 @@ function renderPath(){
     `;
     const grid = block.querySelector(".topic-grid");
 
-    level.topics.forEach(topic => {
+    level.topics.forEach((topic, ti) => {
       topic.resources.forEach(r => { if (r.status === "free") totalFree++; });
       const match = topicMatchesFilters(topic);
       const card = document.createElement("div");
       card.className = "topic-card" + (match ? "" : " hidden");
+      card.dataset.l = li;
+      card.dataset.i = ti;
       const bestIdx = bestFreeIndex(topic.resources);
       const items = topic.resources.map((r,i) => {
         const dim = state.status !== "all" && r.status !== state.status;
@@ -673,7 +933,9 @@ function renderPath(){
           <span class="diff-badge diff-${topic.difficulty}">${topic.difficulty}</span>
         </div>
         <span class="topic-cat">${topic.category}</span>
+        <p class="topic-about">${topic.about}</p>
         <ul class="res-list">${items}</ul>
+        <span class="details-hint">CLICK CARD FOR DETAILS</span>
       `;
       grid.appendChild(card);
     });
@@ -687,7 +949,6 @@ function renderPath(){
 }
 
 function renderStartHere(){
-  // curated beginner sequence, each linked to its best free resource
   const picks = [
     ["L1","Client-Server Architecture"],
     ["L0","Networking Essentials (HTTP, DNS, TCP)"],
@@ -706,12 +967,44 @@ function renderStartHere(){
     const topic = level.topics.find(t => t.name === name);
     const idx = bestFreeIndex(topic.resources);
     const r = topic.resources[idx !== -1 ? idx : 0];
-    return `<li>
+    return `<li data-l="${LEVELS.indexOf(level)}" data-i="${level.topics.indexOf(topic)}">
       <span class="num">${String(i+1).padStart(2,"0")}</span>
       <a class="res-link" href="${r.url}" target="_blank" rel="noopener">${topic.name}</a>
       <span class="via">via ${r.site}</span>
     </li>`;
   }).join("");
+}
+
+function renderRoadmap(){
+  const track = document.getElementById("roadmap-track");
+  const parts = [];
+  LEVELS.forEach((level, li) => {
+    const nodes = level.topics.map((topic, ti) => {
+      const subs = topic.sub && topic.sub.length
+        ? `<div class="rsubs">${topic.sub.map((s, si) =>
+            `<button class="rsub" data-l="${li}" data-i="${ti}" data-si="${si}" data-name="${s}" title="Open ${topic.name} and focus on ${s}">${s}</button>`).join("")}</div>`
+        : "";
+      return `<div class="rnode" data-l="${li}" data-i="${ti}" data-diff="${topic.difficulty}">
+        <button class="rnode-btn" data-l="${li}" data-i="${ti}">
+          <span class="rnode-dot"></span>
+          <span class="rnode-name">${topic.name}<span class="mono-tag">${topic.category} · ${topic.difficulty}</span></span>
+        </button>
+        ${subs}
+      </div>`;
+    }).join("");
+    parts.push(`
+      <div class="r-stage" id="r-${level.id}">
+        <span class="r-head-dot"></span>
+        <div class="r-stage-head">
+          <span class="r-lvl-num mono">${level.label}</span>
+          <h3>${level.title}</h3>
+          <p>${level.desc}</p>
+        </div>
+        <div class="r-nodes">${nodes}</div>
+      </div>`);
+    if (li < LEVELS.length - 1) parts.push(`<div class="r-connector"></div>`);
+  });
+  track.innerHTML = parts.join("");
 }
 
 function renderSites(){
@@ -735,21 +1028,80 @@ function renderSites(){
 }
 
 /* ============================================================
+   TOPIC MODAL (shared by Learning Path + Roadmap)
+   ============================================================ */
+const modal = document.getElementById("topic-modal");
+
+function openTopicModal(topic, subFocus){
+  const best = bestFreeIndex(topic.resources);
+  const items = topic.resources.map((r,i) => resHtml(r, i === best)).join("");
+  const subs = topic.sub && topic.sub.length
+    ? `<div class="modal-subs"><span class="modal-subs-lbl mono">SUB-TOPICS</span>${topic.sub.map(s =>
+        `<span class="modal-sub${s === subFocus ? " active" : ""}">${s}</span>`).join("")}</div>`
+    : "";
+  document.getElementById("modal-body").innerHTML = `
+    <div class="modal-top">
+      <span class="topic-cat mono">${topic.category} · ${topic.difficulty}</span>
+      <span class="diff-badge diff-${topic.difficulty}">${topic.difficulty}</span>
+    </div>
+    <h2 class="modal-title" id="modal-title">${topic.name}</h2>
+    <p class="modal-about">${topic.about}</p>
+    ${subs}
+    <h4 class="modal-res-h">RESOURCES</h4>
+    <ul class="res-list modal-res">${items}</ul>
+  `;
+  modal.classList.remove("hidden");
+  document.body.style.overflow = "hidden";
+}
+
+function closeTopicModal(){
+  modal.classList.add("hidden");
+  document.body.style.overflow = "";
+  clearNodeSelection();
+}
+
+function clearNodeSelection(){
+  document.querySelectorAll(".rnode.selected").forEach(n => n.classList.remove("selected"));
+  document.querySelectorAll(".rsub.active").forEach(n => n.classList.remove("active"));
+  document.querySelectorAll(".r-stage.open").forEach(n => n.classList.remove("open"));
+}
+
+function selectRoadmapNode(li, si){
+  clearNodeSelection();
+  const node = document.querySelector(`.rnode[data-l="${li}"][data-i="${si}"]`);
+  if (node){
+    node.classList.add("selected");
+    const stage = node.closest(".r-stage");
+    if (stage) stage.classList.add("open");
+  }
+}
+
+/* ============================================================
    INTERACTIONS
    ============================================================ */
+function setView(view, updateHash){
+  document.querySelectorAll("nav.tabs button").forEach(b => {
+    b.classList.toggle("active", b.dataset.view === view);
+  });
+  document.getElementById("hero").style.display = view === "path" ? "" : "none";
+  document.getElementById("toolbar").style.display = view === "path" ? "" : "none";
+  document.getElementById("level-rail").style.display = view === "path" ? "" : "none";
+  document.querySelectorAll("main .view").forEach(v => v.classList.toggle("active", v.id === view + "-view"));
+  if (updateHash) history.replaceState(null, "", "#" + view);
+}
+
 document.querySelectorAll("nav.tabs button").forEach(btn => {
-  btn.addEventListener("click", () => {
-    document.querySelectorAll("nav.tabs button").forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-    const view = btn.dataset.view;
-    document.getElementById("path-view").parentElement.style.display = view === "path" ? "" : "none";
-    document.querySelector(".toolbar").style.display = view === "path" ? "" : "none";
-    document.getElementById("level-rail").style.display = view === "path" ? "" : "none";
-    document.getElementById("websites-view").style.display = view === "websites" ? "" : "none";
+  btn.addEventListener("click", () => setView(btn.dataset.view, true));
+});
+
+document.querySelectorAll(".hero-ctas a[data-jump]").forEach(a => {
+  a.addEventListener("click", e => {
+    e.preventDefault();
+    setView(a.dataset.jump, true);
   });
 });
 
-document.querySelectorAll(".chip[data-filter]").forEach(chip => {
+document.querySelectorAll(".toolbar .chip[data-filter]").forEach(chip => {
   chip.addEventListener("click", () => {
     document.querySelectorAll(".chip[data-filter]").forEach(c => c.classList.remove("active"));
     chip.classList.add("active");
@@ -757,7 +1109,7 @@ document.querySelectorAll(".chip[data-filter]").forEach(chip => {
     renderPath();
   });
 });
-document.querySelectorAll(".chip[data-cat]").forEach(chip => {
+document.querySelectorAll(".toolbar .chip[data-cat]").forEach(chip => {
   chip.addEventListener("click", () => {
     document.querySelectorAll(".chip[data-cat]").forEach(c => c.classList.remove("active"));
     chip.classList.add("active");
@@ -770,9 +1122,53 @@ document.getElementById("search").addEventListener("input", e => {
   renderPath();
 });
 
+/* clicking a topic card opens the detail modal (ignore clicks on its links) */
+document.getElementById("path-view").addEventListener("click", e => {
+  if (e.target.closest("a")) return;
+  const card = e.target.closest(".topic-card");
+  if (!card) return;
+  openTopicModal(LEVELS[+card.dataset.l].topics[+card.dataset.i]);
+});
+
+/* start-here items open the detail modal too */
+document.getElementById("start-here-list").addEventListener("click", e => {
+  if (e.target.closest("a")) return;
+  const li = e.target.closest("li");
+  if (!li) return;
+  openTopicModal(LEVELS[+li.dataset.l].topics[+li.dataset.i]);
+});
+
+/* roadmap: node / sub-node clicks */
+document.getElementById("roadmap-track").addEventListener("click", e => {
+  const nodeBtn = e.target.closest(".rnode-btn");
+  if (nodeBtn){
+    const l = +nodeBtn.dataset.l, i = +nodeBtn.dataset.i;
+    selectRoadmapNode(l, i);
+    openTopicModal(LEVELS[l].topics[i]);
+    return;
+  }
+  const sub = e.target.closest(".rsub");
+  if (sub){
+    const l = +sub.dataset.l, i = +sub.dataset.i;
+    selectRoadmapNode(l, i);
+    sub.classList.add("active");
+    openTopicModal(LEVELS[l].topics[i], sub.dataset.name);
+  }
+});
+
+/* modal close */
+document.getElementById("modal-close").addEventListener("click", closeTopicModal);
+modal.addEventListener("click", e => { if (e.target === modal) closeTopicModal(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeTopicModal(); });
+
 renderStartHere();
 renderPath();
+renderRoadmap();
 renderSites();
+
+/* deep link to a view on first load */
+const initial = location.hash.replace("#","");
+if (initial === "path" || initial === "roadmap" || initial === "resources") setView(initial);
 </script>
 </body>
 </html>
