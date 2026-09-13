@@ -119,9 +119,27 @@
   .hero-ctas a.primary{color:var(--ink); background:var(--cyan); border-color:var(--cyan); font-weight:600;}
   .hero-ctas a:hover{color:var(--paper); border-color:var(--cyan-dim);}
   .hero-ctas a.primary:hover{color:var(--ink); background:var(--cyan);}
-  .stats-row{display:flex; gap:36px; margin-top:32px; flex-wrap:wrap;}
+.stats-row{display:flex; gap:36px; margin-top:32px; flex-wrap:wrap;}
   .stat b{display:block; font-family:'Space Grotesk',sans-serif; font-size:26px; color:var(--paper);}
   .stat span{color:var(--muted); font-size:12.5px;}
+
+.progress-wrap{margin-top:26px; max-width:640px;}
+.progress-label{
+  display:flex; justify-content:space-between; gap:10px;
+  font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--muted);
+  margin-bottom:8px;
+}
+.progress-label b{color:var(--cyan); font-weight:500;}
+.progress-track{
+  height:10px; background:var(--ink-3); border:1px solid var(--line);
+  border-radius:6px; overflow:hidden;
+}
+.progress-fill{
+  height:100%; width:0%;
+  background:linear-gradient(90deg, var(--cyan-dim), var(--cyan));
+  transition:width .35s ease;
+}
+#roadmap-view .progress-wrap{margin-top:18px;}
 
   .start-here{
     margin-top:48px; border:1px solid var(--line); border-radius:6px;
@@ -144,6 +162,8 @@
   .step-line a.res-link:hover{border-color:var(--cyan);}
   .step-line .via{color:var(--muted); font-size:12px;}
   .step-line li:not(:has(a)):hover .num{color:var(--cyan);}
+  .step-line li.covered .num{color:var(--cyan);}
+  .step-line li.covered a.res-link{color:var(--cyan-dim); text-decoration:line-through;}
 
   /* ===== toolbar ===== */
   .toolbar{
@@ -202,6 +222,16 @@
   .topic-card:hover{border-color:var(--cyan-dim); box-shadow:0 6px 18px rgba(0,0,0,.35), 0 0 0 1px rgba(111,211,192,.08);}
   .topic-card:active{transform:translateY(1px);}
   .topic-card.hidden{display:none;}
+  .topic-card.covered{border-color:var(--cyan-dim); background:linear-gradient(180deg, rgba(111,211,192,.06), var(--ink-2));}
+  .topic-card.covered .topic-top h4{color:var(--cyan);}
+  .mark-btn{
+    font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.02em;
+    border:1px solid var(--line); background:var(--ink-3); color:var(--muted);
+    border-radius:4px; padding:3px 8px; cursor:pointer; flex-shrink:0; line-height:1.4;
+  }
+  .mark-btn:hover{color:var(--paper); border-color:var(--cyan-dim);}
+  .mark-btn.on{background:var(--cyan); color:var(--ink); border-color:var(--cyan); font-weight:600;}
+  .mark-btn.on:hover{color:var(--ink);}
   .topic-top{display:flex; justify-content:space-between; align-items:flex-start; gap:8px;}
   .topic-top h4{font-size:15.5px; color:var(--paper);}
   .diff-badge{
@@ -281,6 +311,9 @@
   }
   .rsub:hover{color:var(--cyan); border-color:var(--cyan-dim);}
   .rsub.active{color:var(--ink); background:var(--cyan); border-style:solid; border-color:var(--cyan);}
+  .rnode.covered .rnode-btn{border-color:var(--cyan-dim); background:rgba(111,211,192,.06);}
+  .rnode.covered .rnode-name{color:var(--cyan);}
+  .rnode.covered .rnode-dot{background:var(--cyan); box-shadow:0 0 0 3px rgba(111,211,192,.15);}
   .r-connector{position:relative; width:2px; height:24px; background:var(--line-soft); margin:4px 0 12px; left:9px;}
   .r-hint{color:var(--muted); font-size:12px; border:1px dashed var(--line); border-radius:4px; padding:8px 12px; margin:14px 0 4px; background:rgba(111,211,192,.03);}
 
@@ -330,6 +363,14 @@
   .modal-res-h{margin:20px 0 10px; font-size:12px; color:var(--muted); font-family:'JetBrains Mono',monospace; letter-spacing:.08em;}
   .modal-res.m-res li{font-size:13.5px;}
   .modal-res a{color:var(--paper-dim);}
+  .modal-actions{margin-top:22px;}
+  .mark-covered-btn{
+    width:100%; font-family:'Inter',sans-serif; font-size:13px; font-weight:600;
+    background:var(--ink-3); border:1px solid var(--line); color:var(--paper-dim);
+    padding:10px 16px; border-radius:var(--radius); cursor:pointer;
+  }
+  .mark-covered-btn:hover{color:var(--paper); border-color:var(--cyan-dim);}
+  .mark-covered-btn.on{background:rgba(111,211,192,.10); color:var(--cyan); border-color:var(--cyan-dim);}
 
   footer{
     max-width:1100px; margin:0 auto; padding:30px 28px 60px; color:var(--muted); font-size:12.5px;
@@ -380,7 +421,16 @@
   <div class="stats-row">
     <div class="stat"><b id="stat-topics">–</b><span>canonical topics</span></div>
     <div class="stat"><b id="stat-free">–</b><span>free resources linked</span></div>
+    <div class="stat"><b id="stat-covered">–</b><span>topics covered</span></div>
     <div class="stat"><b id="stat-sites">5</b><span>source sites, one place</span></div>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-label mono">
+      <span>Your progress</span>
+      <span><b id="prog-label-main">0 / 0 · 0%</b></span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="prog-fill-main"></div></div>
   </div>
 
   <div class="start-here">
@@ -393,6 +443,9 @@
   <button class="chip active" data-filter="all">All</button>
   <button class="chip" data-filter="free">Free only</button>
   <button class="chip" data-filter="paid">Paid only</button>
+  <div class="sep"></div>
+  <button class="chip" data-covered="covered">Covered</button>
+  <button class="chip" data-covered="remaining">Remaining</button>
   <div class="sep"></div>
   <button class="chip" data-cat="all">Every category</button>
   <button class="chip" data-cat="HLD">HLD</button>
@@ -412,6 +465,13 @@
       <span class="lvl-num mono">ROADMAP</span>
       <h2>System Design from zero to job-ready</h2>
       <p>A top-to-bottom graph of everything on this site. Click any node to see what the topic covers and which resources explain it. Some nodes have sub-nodes — the smaller dashed chips — that flag specific sub-topics worth learning.</p>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-label mono">
+        <span>Path progress</span>
+        <span><b id="prog-label-roadmap">0 / 0 · 0%</b></span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="prog-fill-roadmap"></div></div>
     </div>
     <div class="r-hint">⌘ Click a node (or a sub-node) to open its topic card. Levels flow top → bottom.</div>
     <div class="roadmap-track" id="roadmap-track"></div>
@@ -857,7 +917,25 @@ const SITES = [
 /* ============================================================
    RENDER
    ============================================================ */
-let state = { status:"all", cat:"all", q:"" };
+let state = { status:"all", cat:"all", q:"", covered:"all" };
+
+/* covered-topic tracking persisted in the browser */
+const COVER_KEY = "system-design-atlas-cover-v1";
+let covered = loadCovered();
+function loadCovered(){
+  try { const raw = localStorage.getItem(COVER_KEY); return raw ? JSON.parse(raw) : []; }
+  catch(e){ return []; }
+}
+function saveCovered(){ try { localStorage.setItem(COVER_KEY, JSON.stringify(covered)); } catch(e){} }
+function isCovered(topic){ return covered.indexOf(topic.name) !== -1; }
+function toggleCovered(topic){
+  const i = covered.indexOf(topic.name);
+  if (i === -1) covered.push(topic.name); else covered.splice(i, 1);
+  saveCovered();
+  renderPath();
+  syncStartHere();
+  syncRoadmapCoverage();
+}
 
 function pill(status){
   const label = status === "free" ? "FREE" : status === "paid" ? "PAID" : "?";
@@ -884,8 +962,24 @@ function bestFreeIndex(resources){
 function topicMatchesFilters(topic){
   if (state.cat !== "all" && topic.category !== state.cat) return false;
   if (state.q && !topic.name.toLowerCase().includes(state.q)) return false;
+  if (state.covered === "covered" && !isCovered(topic)) return false;
+  if (state.covered === "remaining" && isCovered(topic)) return false;
   if (state.status === "all") return true;
   return topic.resources.some(r => r.status === state.status);
+}
+
+function totalTopicsCount(){
+  return LEVELS.reduce((n, l) => n + l.topics.length, 0);
+}
+
+function updateProgress(){
+  const total = totalTopicsCount();
+  const pct = total ? Math.round(covered.length / total * 100) : 0;
+  const label = `${covered.length} / ${total} · ${pct}%`;
+  document.getElementById("prog-fill-main").style.width = pct + "%";
+  document.getElementById("prog-label-main").textContent = label;
+  document.getElementById("prog-fill-roadmap").style.width = pct + "%";
+  document.getElementById("prog-label-roadmap").textContent = label;
 }
 
 function renderPath(){
@@ -918,7 +1012,7 @@ function renderPath(){
       topic.resources.forEach(r => { if (r.status === "free") totalFree++; });
       const match = topicMatchesFilters(topic);
       const card = document.createElement("div");
-      card.className = "topic-card" + (match ? "" : " hidden");
+      card.className = "topic-card" + (match ? "" : " hidden") + (isCovered(topic) ? " covered" : "");
       card.dataset.l = li;
       card.dataset.i = ti;
       const bestIdx = bestFreeIndex(topic.resources);
@@ -930,6 +1024,7 @@ function renderPath(){
       card.innerHTML = `
         <div class="topic-top">
           <h4>${topic.name}</h4>
+          <span class="mark-btn${isCovered(topic) ? " on" : ""}" data-mark title="${isCovered(topic) ? "Mark as not covered" : "Mark as covered"}">${isCovered(topic) ? "✓ Covered" : "Mark done"}</span>
           <span class="diff-badge diff-${topic.difficulty}">${topic.difficulty}</span>
         </div>
         <span class="topic-cat">${topic.category}</span>
@@ -943,9 +1038,11 @@ function renderPath(){
     if (visibleTopics.length > 0) container.appendChild(block);
   });
 
-  document.getElementById("visible-count").textContent = `${visibleCount} / ${totalTopics} topics shown`;
+  document.getElementById("visible-count").textContent = `${visibleCount} / ${totalTopics} topics · ${covered.length} covered`;
   document.getElementById("stat-topics").textContent = totalTopics;
   document.getElementById("stat-free").textContent = totalFree;
+  document.getElementById("stat-covered").textContent = covered.length;
+  updateProgress();
 }
 
 function renderStartHere(){
@@ -967,12 +1064,19 @@ function renderStartHere(){
     const topic = level.topics.find(t => t.name === name);
     const idx = bestFreeIndex(topic.resources);
     const r = topic.resources[idx !== -1 ? idx : 0];
-    return `<li data-l="${LEVELS.indexOf(level)}" data-i="${level.topics.indexOf(topic)}">
+    return `<li data-l="${LEVELS.indexOf(level)}" data-i="${level.topics.indexOf(topic)}"${isCovered(topic) ? ' class="covered"' : ""}>
       <span class="num">${String(i+1).padStart(2,"0")}</span>
       <a class="res-link" href="${r.url}" target="_blank" rel="noopener">${topic.name}</a>
       <span class="via">via ${r.site}</span>
     </li>`;
   }).join("");
+}
+
+function syncStartHere(){
+  document.querySelectorAll("#start-here-list li").forEach(li => {
+    const t = LEVELS[+li.dataset.l].topics[+li.dataset.i];
+    li.classList.toggle("covered", isCovered(t));
+  });
 }
 
 function renderRoadmap(){
@@ -984,7 +1088,7 @@ function renderRoadmap(){
         ? `<div class="rsubs">${topic.sub.map((s, si) =>
             `<button class="rsub" data-l="${li}" data-i="${ti}" data-si="${si}" data-name="${s}" title="Open ${topic.name} and focus on ${s}">${s}</button>`).join("")}</div>`
         : "";
-      return `<div class="rnode" data-l="${li}" data-i="${ti}" data-diff="${topic.difficulty}">
+      return `<div class="rnode" data-l="${li}" data-i="${ti}" data-diff="${topic.difficulty}"${isCovered(topic) ? " covered" : ""}>
         <button class="rnode-btn" data-l="${li}" data-i="${ti}">
           <span class="rnode-dot"></span>
           <span class="rnode-name">${topic.name}<span class="mono-tag">${topic.category} · ${topic.difficulty}</span></span>
@@ -1005,6 +1109,13 @@ function renderRoadmap(){
     if (li < LEVELS.length - 1) parts.push(`<div class="r-connector"></div>`);
   });
   track.innerHTML = parts.join("");
+}
+
+function syncRoadmapCoverage(){
+  document.querySelectorAll(".rnode").forEach(n => {
+    const t = LEVELS[+n.dataset.l].topics[+n.dataset.i];
+    n.classList.toggle("covered", isCovered(t));
+  });
 }
 
 function renderSites(){
@@ -1031,8 +1142,10 @@ function renderSites(){
    TOPIC MODAL (shared by Learning Path + Roadmap)
    ============================================================ */
 const modal = document.getElementById("topic-modal");
+let modalTopic = null;
 
 function openTopicModal(topic, subFocus){
+  modalTopic = topic;
   const best = bestFreeIndex(topic.resources);
   const items = topic.resources.map((r,i) => resHtml(r, i === best)).join("");
   const subs = topic.sub && topic.sub.length
@@ -1049,6 +1162,9 @@ function openTopicModal(topic, subFocus){
     ${subs}
     <h4 class="modal-res-h">RESOURCES</h4>
     <ul class="res-list modal-res">${items}</ul>
+    <div class="modal-actions">
+      <button class="mark-covered-btn${isCovered(topic) ? " on" : ""}" id="modal-mark" type="button">${isCovered(topic) ? "✓ Covered — tap to undo" : "Mark this topic as covered"}</button>
+    </div>
   `;
   modal.classList.remove("hidden");
   document.body.style.overflow = "hidden";
@@ -1122,8 +1238,24 @@ document.getElementById("search").addEventListener("input", e => {
   renderPath();
 });
 
+document.querySelectorAll(".toolbar .chip[data-covered]").forEach(chip => {
+  chip.addEventListener("click", () => {
+    const val = chip.dataset.covered;
+    state.covered = state.covered === val ? "all" : val;
+    document.querySelectorAll(".chip[data-covered]").forEach(c =>
+      c.classList.toggle("active", c.dataset.covered === state.covered));
+    renderPath();
+  });
+});
+
 /* clicking a topic card opens the detail modal (ignore clicks on its links) */
 document.getElementById("path-view").addEventListener("click", e => {
+  const mark = e.target.closest(".mark-btn");
+  if (mark){
+    const card = mark.closest(".topic-card");
+    toggleCovered(LEVELS[+card.dataset.l].topics[+card.dataset.i]);
+    return;
+  }
   if (e.target.closest("a")) return;
   const card = e.target.closest(".topic-card");
   if (!card) return;
@@ -1158,7 +1290,18 @@ document.getElementById("roadmap-track").addEventListener("click", e => {
 
 /* modal close */
 document.getElementById("modal-close").addEventListener("click", closeTopicModal);
-modal.addEventListener("click", e => { if (e.target === modal) closeTopicModal(); });
+modal.addEventListener("click", e => {
+  const mark = e.target.closest("#modal-mark");
+  if (mark){
+    if (modalTopic){
+      toggleCovered(modalTopic);
+      mark.classList.toggle("on", isCovered(modalTopic));
+      mark.textContent = isCovered(modalTopic) ? "✓ Covered — tap to undo" : "Mark this topic as covered";
+    }
+    return;
+  }
+  if (e.target === modal) closeTopicModal();
+});
 document.addEventListener("keydown", e => { if (e.key === "Escape") closeTopicModal(); });
 
 renderStartHere();
