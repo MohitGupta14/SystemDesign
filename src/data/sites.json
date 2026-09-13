@@ -1,0 +1,27 @@
+[
+  {
+    "name": "ByteByteGo",
+    "base": "https://bytebytego.com",
+    "desc": "System Design Interview and Object-Oriented Design Interview courses — the widest single-source case-study and LLD library here."
+  },
+  {
+    "name": "Hello Interview",
+    "base": "https://www.hellointerview.com",
+    "desc": "Core concepts, deep dives on real technologies (Redis, Kafka, Cassandra…), architecture patterns, and by far the largest set of fully-free case-study breakdowns."
+  },
+  {
+    "name": "HLD Mastery",
+    "base": "https://hldmastery.com",
+    "desc": "Short, focused fundamentals — scalability, availability, latency — good as a first pass before the denser sites."
+  },
+  {
+    "name": "DesignGurus",
+    "base": "https://www.designgurus.io",
+    "desc": "Grokking the System Design Interview (I & II) — trade-off theory (CAP, quorum, consistent hashing) and the only source covering Dynamo/GFS/BigTable-style architecture studies."
+  },
+  {
+    "name": "LowLevelDesignMastery",
+    "base": "https://www.lowleveldesignmastery.com",
+    "desc": "Design-pattern focused — currently one confirmed page in this collection, more to be folded in over time."
+  }
+]

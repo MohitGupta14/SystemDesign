@@ -1,0 +1,1775 @@
+[
+  {
+    "id": "L0",
+    "label": "Level 0",
+    "title": "Prerequisites",
+    "desc": "If these feel shaky, system design will feel like magic instead of engineering. Skim, don't linger.",
+    "topics": [
+      {
+        "name": "Networking Essentials (HTTP, DNS, TCP)",
+        "difficulty": "Beginner",
+        "category": "HLD",
+        "about": "How machines find and talk to each other: the request/response model, name resolution, and reliable transport.",
+        "sub": [
+          "HTTP",
+          "DNS",
+          "TCP"
+        ],
+        "resources": [
+          {
+            "site": "Hello Interview",
+            "title": "Networking Essentials",
+            "url": "https://www.hellointerview.com/learn/system-design/core-concepts/networking-essentials",
+            "status": "free",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "API Design",
+        "difficulty": "Beginner",
+        "category": "HLD",
+        "about": "Designing the interfaces systems expose to each other: verbs, status codes, contracts, and versioning.",
+        "sub": [
+          "REST",
+          "gRPC",
+          "GraphQL"
+        ],
+        "resources": [
+          {
+            "site": "Hello Interview",
+            "title": "API Design",
+            "url": "https://www.hellointerview.com/learn/system-design/core-concepts/api-design",
+            "status": "free",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "Data Modeling",
+        "difficulty": "Beginner",
+        "category": "HLD",
+        "about": "Shaping your data before you store it: entities, relationships, keys, and the read patterns they serve.",
+        "sub": [
+          "Entities & Relations",
+          "Keys",
+          "Access Patterns"
+        ],
+        "resources": [
+          {
+            "site": "Hello Interview",
+            "title": "Data Modeling",
+            "url": "https://www.hellointerview.com/learn/system-design/core-concepts/data-modeling",
+            "status": "free",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "SQL vs NoSQL",
+        "difficulty": "Beginner",
+        "category": "HLD",
+        "about": "Choosing a storage engine by consistency, flexibility, and the shape of your queries.",
+        "sub": [
+          "SQL",
+          "NoSQL",
+          "When Each Wins"
+        ],
+        "resources": [
+          {
+            "site": "DesignGurus",
+            "title": "SQL vs. NoSQL",
+            "url": "https://www.designgurus.io/course-play/grokking-the-system-design-interview/doc/sql-vs-nosql",
+            "status": "paid",
+            "conf": "reconstructed"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "L1",
+    "label": "Level 1",
+    "title": "System Design Fundamentals",
+    "desc": "The vocabulary every later topic assumes you already have: how systems talk, scale, and stay up.",
+    "topics": [
+      {
+        "name": "Client-Server Architecture",
+        "difficulty": "Beginner",
+        "category": "HLD",
+        "about": "The workhorse topology: clients make requests, servers respond with results.",
+        "resources": [
+          {
+            "site": "HLD Mastery",
+            "title": "Client-Server Architecture",
+            "url": "https://hldmastery.com/learn/client-server-architecture",
+            "status": "free",
+            "conf": "reconstructed"
+          }
+        ]
+      },
+      {
+        "name": "Scalability",
+        "difficulty": "Beginner",
+        "category": "HLD",
+        "about": "Growing capacity without redesigning: add more resources to one box, or split the work across many.",
+        "sub": [
+          "Vertical Scaling",
+          "Horizontal Scaling",
+          "Load Balancing"
+        ],
+        "resources": [
+          {
+            "site": "HLD Mastery",
+            "title": "Scalability",
+            "url": "https://hldmastery.com/learn/scalability",
+            "status": "free",
+            "conf": "reconstructed"
+          },
+          {
+            "site": "ByteByteGo",
+            "title": "Scale From Zero To Millions Of Users",
+            "url": "https://bytebytego.com/courses/system-design-interview/scale-from-zero-to-millions-of-users",
+            "status": "free",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "Availability",
+        "difficulty": "Beginner",
+        "category": "HLD",
+        "about": "The percentage of time a system actually works, achieved with redundancy and failover.",
+        "sub": [
+          "High Availability",
+          "Failover",
+          "SLAs"
+        ],
+        "resources": [
+          {
+            "site": "HLD Mastery",
+            "title": "Availability",
+            "url": "https://hldmastery.com/learn/availability",
+            "status": "free",
+            "conf": "reconstructed"
+          }
+        ]
+      },
+      {
+        "name": "Reliability",
+        "difficulty": "Beginner",
+        "category": "HLD",
+        "about": "Staying correct under faults; it is about tolerating failures, not avoiding them entirely.",
+        "resources": [
+          {
+            "site": "HLD Mastery",
+            "title": "Reliability",
+            "url": "https://hldmastery.com/learn/reliability",
+            "status": "paid",
+            "conf": "reconstructed"
+          }
+        ]
+      },
+      {
+        "name": "Latency, Throughput & Bandwidth",
+        "difficulty": "Beginner",
+        "category": "HLD",
+        "about": "Three numbers that define performance: delay per request, work per second, and link capacity.",
+        "resources": [
+          {
+            "site": "HLD Mastery",
+            "title": "Latency vs Throughput vs Bandwidth",
+            "url": "https://hldmastery.com/learn/latency-throughput-bandwidth",
+            "status": "free",
+            "conf": "reconstructed"
+          }
+        ]
+      },
+      {
+        "name": "Back-of-the-Envelope Estimation",
+        "difficulty": "Beginner",
+        "category": "HLD",
+        "about": "Rough arithmetic to sanity-check a design early: QPS, storage, and cache sizes without a calculator.",
+        "resources": [
+          {
+            "site": "ByteByteGo",
+            "title": "Back-of-the-envelope Estimation",
+            "url": "https://bytebytego.com/courses/system-design-interview/back-of-the-envelope-estimation",
+            "status": "free",
+            "conf": "verified"
+          },
+          {
+            "site": "DesignGurus",
+            "title": "What are Back-of-the-Envelope Estimations?",
+            "url": "https://www.designgurus.io/course-play/grokking-the-system-design-interview/doc/what-are-backoftheenvelope-estimations",
+            "status": "free",
+            "conf": "reconstructed"
+          }
+        ]
+      },
+      {
+        "name": "Caching",
+        "difficulty": "Beginner",
+        "category": "HLD",
+        "about": "Storing hot data closer to the reader to slash latency and take pressure off the database.",
+        "sub": [
+          "Cache-Aside",
+          "Write-Through",
+          "TTL & Eviction"
+        ],
+        "resources": [
+          {
+            "site": "Hello Interview",
+            "title": "Caching",
+            "url": "https://www.hellointerview.com/learn/system-design/core-concepts/caching",
+            "status": "free",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "Database Indexing",
+        "difficulty": "Beginner",
+        "category": "HLD",
+        "about": "Extra lookup structures that turn full table scans into fast point reads.",
+        "resources": [
+          {
+            "site": "Hello Interview",
+            "title": "Database Indexing",
+            "url": "https://www.hellointerview.com/learn/system-design/core-concepts/db-indexing",
+            "status": "free",
+            "conf": "verified"
+          },
+          {
+            "site": "DesignGurus",
+            "title": "Indexes",
+            "url": "https://www.designgurus.io/course-play/grokking-the-system-design-interview/doc/indexes",
+            "status": "paid",
+            "conf": "reconstructed"
+          }
+        ]
+      },
+      {
+        "name": "A Framework for System Design Interviews",
+        "difficulty": "Beginner",
+        "category": "HLD",
+        "about": "The skeleton every good answer follows: clarify, estimate, design APIs and data, then deep-dive.",
+        "sub": [
+          "Clarify",
+          "Estimate",
+          "Design",
+          "Deep Dive"
+        ],
+        "resources": [
+          {
+            "site": "ByteByteGo",
+            "title": "A Framework For System Design Interviews",
+            "url": "https://bytebytego.com/courses/system-design-interview/a-framework-for-system-design-interviews",
+            "status": "free",
+            "conf": "verified"
+          },
+          {
+            "site": "DesignGurus",
+            "title": "System Design Master Template",
+            "url": "https://www.designgurus.io/course-play/grokking-the-system-design-interview/doc/system-design-master-template",
+            "status": "free",
+            "conf": "reconstructed"
+          },
+          {
+            "site": "Hello Interview",
+            "title": "Delivery Framework",
+            "url": "https://www.hellointerview.com/learn/system-design/in-a-hurry/delivery",
+            "status": "free",
+            "conf": "verified"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "L2",
+    "label": "Level 2",
+    "title": "Core Distributed-System Concepts",
+    "desc": "How data spreads across machines, and how those machines agree on what's true.",
+    "topics": [
+      {
+        "name": "Sharding / Data Partitioning",
+        "difficulty": "Intermediate",
+        "category": "HLD",
+        "about": "Splitting data across machines so no single node becomes a hot row or a bottleneck.",
+        "sub": [
+          "Hash Sharding",
+          "Range Sharding",
+          "Rebalancing"
+        ],
+        "resources": [
+          {
+            "site": "Hello Interview",
+            "title": "Sharding",
+            "url": "https://www.hellointerview.com/learn/system-design/core-concepts/sharding",
+            "status": "free",
+            "conf": "verified"
+          },
+          {
+            "site": "DesignGurus",
+            "title": "Data Partitioning",
+            "url": "https://www.designgurus.io/course-play/grokking-the-system-design-interview/doc/data-partitioning",
+            "status": "paid",
+            "conf": "reconstructed"
+          }
+        ]
+      },
+      {
+        "name": "Consistent Hashing",
+        "difficulty": "Intermediate",
+        "category": "HLD",
+        "about": "A hash ring that keeps key movement minimal when nodes are added or removed.",
+        "sub": [
+          "Hash Ring",
+          "Virtual Nodes",
+          "Skew"
+        ],
+        "resources": [
+          {
+            "site": "Hello Interview",
+            "title": "Consistent Hashing",
+            "url": "https://www.hellointerview.com/learn/system-design/core-concepts/consistent-hashing",
+            "status": "free",
+            "conf": "verified"
+          },
+          {
+            "site": "ByteByteGo",
+            "title": "Design Consistent Hashing",
+            "url": "https://bytebytego.com/courses/system-design-interview/design-consistent-hashing",
+            "status": "free",
+            "conf": "verified"
+          },
+          {
+            "site": "DesignGurus",
+            "title": "Consistent Hashing",
+            "url": "https://www.designgurus.io/course-play/grokking-the-system-design-interview/doc/consistent-hashing-new",
+            "status": "paid",
+            "conf": "reconstructed"
+          }
+        ]
+      },
+      {
+        "name": "Replication",
+        "difficulty": "Intermediate",
+        "category": "HLD",
+        "about": "Copying data to multiple nodes so one copy failing is not the whole story ending.",
+        "resources": [
+          {
+            "site": "DesignGurus",
+            "title": "Redundancy and Replication",
+            "url": "https://www.designgurus.io/course-play/grokking-the-system-design-interview/doc/redundancy-and-replication",
+            "status": "paid",
+            "conf": "reconstructed"
+          }
+        ]
+      },
+      {
+        "name": "CAP Theorem",
+        "difficulty": "Intermediate",
+        "category": "HLD",
+        "about": "When the network partitions you get to pick consistency or availability, not both.",
+        "sub": [
+          "Consistency",
+          "Availability",
+          "Partition Tolerance"
+        ],
+        "resources": [
+          {
+            "site": "Hello Interview",
+            "title": "CAP Theorem",
+            "url": "https://www.hellointerview.com/learn/system-design/core-concepts/cap-theorem",
+            "status": "free",
+            "conf": "verified"
+          },
+          {
+            "site": "DesignGurus",
+            "title": "CAP Theorem",
+            "url": "https://www.designgurus.io/course-play/grokking-the-system-design-interview/doc/cap-theorem",
+            "status": "paid",
+            "conf": "reconstructed"
+          }
+        ]
+      },
+      {
+        "name": "PACELC Theorem",
+        "difficulty": "Advanced",
+        "category": "HLD",
+        "about": "CAP extended: even with no partition, you still trade latency against consistency.",
+        "resources": [
+          {
+            "site": "DesignGurus",
+            "title": "PACELC Theorem",
+            "url": "https://www.designgurus.io/course-play/grokking-the-system-design-interview/doc/pacelc-theorem-new",
+            "status": "paid",
+            "conf": "reconstructed"
+          }
+        ]
+      },
+      {
+        "name": "Quorum",
+        "difficulty": "Intermediate",
+        "category": "HLD",
+        "about": "A majority of replicas must agree (W+R > N) so reads always see the latest write.",
+        "resources": [
+          {
+            "site": "DesignGurus",
+            "title": "Quorum",
+            "url": "https://www.designgurus.io/course-play/grokking-the-system-design-interview/doc/quorum-new",
+            "status": "paid",
+            "conf": "reconstructed"
+          }
+        ]
+      },
+      {
+        "name": "Leader & Follower / Leader Election",
+        "difficulty": "Intermediate",
+        "category": "HLD",
+        "about": "One node writes, many nodes read; election keeps a replacement ready when it dies.",
+        "resources": [
+          {
+            "site": "DesignGurus",
+            "title": "Leader and Follower",
+            "url": "https://www.designgurus.io/course-play/grokking-the-system-design-interview/doc/leader-and-follower-new",
+            "status": "paid",
+            "conf": "reconstructed"
+          }
+        ]
+      },
+      {
+        "name": "Heartbeats",
+        "difficulty": "Intermediate",
+        "category": "HLD",
+        "about": "Periodic pings that answer the only question that matters: is that node still alive?",
+        "resources": [
+          {
+            "site": "DesignGurus",
+            "title": "Heartbeat",
+            "url": "https://www.designgurus.io/course-play/grokking-the-system-design-interview/doc/heartbeat-new",
+            "status": "paid",
+            "conf": "reconstructed"
+          }
+        ]
+      },
+      {
+        "name": "Checksums",
+        "difficulty": "Intermediate",
+        "category": "HLD",
+        "about": "Small digests that catch corrupted data while it is in transit or at rest.",
+        "resources": [
+          {
+            "site": "DesignGurus",
+            "title": "Checksum",
+            "url": "https://www.designgurus.io/course-play/grokking-the-system-design-interview/doc/checksum-new",
+            "status": "paid",
+            "conf": "reconstructed"
+          }
+        ]
+      },
+      {
+        "name": "Bloom Filters",
+        "difficulty": "Intermediate",
+        "category": "HLD",
+        "about": "A compact 'definitely not / maybe yes' set check that saves a page of disk reads.",
+        "resources": [
+          {
+            "site": "DesignGurus",
+            "title": "Bloom Filters",
+            "url": "https://www.designgurus.io/course-play/grokking-the-system-design-interview/doc/bloom-filters",
+            "status": "paid",
+            "conf": "reconstructed"
+          },
+          {
+            "site": "HLD Mastery",
+            "title": "Bloom Filter",
+            "url": "https://hldmastery.com/learn/bloom-filter",
+            "status": "unknown",
+            "conf": "reconstructed"
+          }
+        ]
+      },
+      {
+        "name": "Message Queues & Kafka",
+        "difficulty": "Intermediate",
+        "category": "HLD",
+        "about": "Asynchronous hand-off between producers and consumers so services never have to wait on each other.",
+        "sub": [
+          "Producer",
+          "Consumer",
+          "Topics & Partitions"
+        ],
+        "resources": [
+          {
+            "site": "Hello Interview",
+            "title": "Kafka",
+            "url": "https://www.hellointerview.com/learn/system-design/deep-dives/kafka",
+            "status": "free",
+            "conf": "verified"
+          },
+          {
+            "site": "ByteByteGo",
+            "title": "Distributed Message Queue",
+            "url": "https://bytebytego.com/courses/system-design-interview/distributed-message-queue",
+            "status": "paid",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "Unique ID Generation",
+        "difficulty": "Intermediate",
+        "category": "HLD",
+        "about": "Globally unique, often sortable IDs without a single serial sequence as the bottleneck.",
+        "resources": [
+          {
+            "site": "ByteByteGo",
+            "title": "Design A Unique ID Generator In Distributed Systems",
+            "url": "https://bytebytego.com/courses/system-design-interview/design-a-unique-id-generator-in-distributed-systems",
+            "status": "paid",
+            "conf": "reconstructed"
+          }
+        ]
+      },
+      {
+        "name": "Key-Value Stores",
+        "difficulty": "Intermediate",
+        "category": "HLD",
+        "about": "Simple get/put systems that scale out with partitioning and replication.",
+        "resources": [
+          {
+            "site": "ByteByteGo",
+            "title": "Design A Key-value Store",
+            "url": "https://bytebytego.com/courses/system-design-interview/design-a-key-value-store",
+            "status": "free",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "Rate Limiting",
+        "difficulty": "Intermediate",
+        "category": "HLD",
+        "about": "Throttling how many requests a client can make per window to protect the system.",
+        "sub": [
+          "Token Bucket",
+          "Leaky Bucket",
+          "Sliding Window"
+        ],
+        "resources": [
+          {
+            "site": "ByteByteGo",
+            "title": "Design A Rate Limiter",
+            "url": "https://bytebytego.com/courses/system-design-interview/design-a-rate-limiter",
+            "status": "free",
+            "conf": "verified"
+          },
+          {
+            "site": "Hello Interview",
+            "title": "Rate Limiter",
+            "url": "https://www.hellointerview.com/learn/system-design/problem-breakdowns/distributed-rate-limiter",
+            "status": "free",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "Long-Polling vs WebSockets vs SSE",
+        "difficulty": "Intermediate",
+        "category": "HLD",
+        "about": "Three ways to push data server-to-client, each with a different latency and load profile.",
+        "resources": [
+          {
+            "site": "DesignGurus",
+            "title": "Long-Polling vs WebSockets vs Server-Sent Events",
+            "url": "https://www.designgurus.io/course-play/grokking-the-system-design-interview/doc/longpolling-vs-websockets-vs-serversent-events",
+            "status": "paid",
+            "conf": "reconstructed"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "L3",
+    "label": "Level 3",
+    "title": "Architecture Patterns",
+    "desc": "Recurring shapes that show up across almost every real-world design — learn the pattern once, spot it everywhere.",
+    "topics": [
+      {
+        "name": "Scaling Reads",
+        "difficulty": "Intermediate",
+        "category": "Pattern",
+        "about": "Replicas, caches, and CDNs: hand more readers the same data without burning your primary.",
+        "resources": [
+          {
+            "site": "Hello Interview",
+            "title": "Scaling Reads",
+            "url": "https://www.hellointerview.com/learn/system-design/patterns/scaling-reads",
+            "status": "paid",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "Scaling Writes",
+        "difficulty": "Intermediate",
+        "category": "Pattern",
+        "about": "Partitioning and append-only tricks so writes never collide on a single hot row.",
+        "resources": [
+          {
+            "site": "Hello Interview",
+            "title": "Scaling Writes",
+            "url": "https://www.hellointerview.com/learn/system-design/patterns/scaling-writes",
+            "status": "paid",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "Real-time Updates",
+        "difficulty": "Intermediate",
+        "category": "Pattern",
+        "about": "WebSockets, SSE, or polling to keep a page fresh without reloading it.",
+        "resources": [
+          {
+            "site": "Hello Interview",
+            "title": "Real-time Updates",
+            "url": "https://www.hellointerview.com/learn/system-design/patterns/realtime-updates",
+            "status": "paid",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "Dealing with Contention",
+        "difficulty": "Advanced",
+        "category": "Pattern",
+        "about": "Locks, queues, and idempotency for when many users fight over the same resource.",
+        "resources": [
+          {
+            "site": "Hello Interview",
+            "title": "Dealing with Contention",
+            "url": "https://www.hellointerview.com/learn/system-design/patterns/dealing-with-contention",
+            "status": "paid",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "Multi-step Processes / Workflows",
+        "difficulty": "Intermediate",
+        "category": "Pattern",
+        "about": "Long operations broken into durable, resumable steps that survive crashes.",
+        "resources": [
+          {
+            "site": "Hello Interview",
+            "title": "Multi-step Processes",
+            "url": "https://www.hellointerview.com/learn/system-design/patterns/multi-step-processes",
+            "status": "paid",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "Managing Long-Running Tasks",
+        "difficulty": "Intermediate",
+        "category": "Pattern",
+        "about": "Offloading heavy work to background workers with progress tracking and retries.",
+        "resources": [
+          {
+            "site": "Hello Interview",
+            "title": "Managing Long Running Tasks",
+            "url": "https://www.hellointerview.com/learn/system-design/patterns/long-running-tasks",
+            "status": "paid",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "Handling Large Blobs",
+        "difficulty": "Intermediate",
+        "category": "Pattern",
+        "about": "Streaming and object storage for files too big for a database row.",
+        "resources": [
+          {
+            "site": "Hello Interview",
+            "title": "Handling Large Blobs",
+            "url": "https://www.hellointerview.com/learn/system-design/patterns/large-blobs",
+            "status": "paid",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "API Gateway",
+        "difficulty": "Intermediate",
+        "category": "HLD",
+        "about": "A single front door for auth, routing, throttling, and request aggregation.",
+        "resources": [
+          {
+            "site": "Hello Interview",
+            "title": "API Gateway",
+            "url": "https://www.hellointerview.com/learn/system-design/deep-dives/api-gateway",
+            "status": "free",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "Redis Deep Dive",
+        "difficulty": "Intermediate",
+        "category": "HLD",
+        "about": "An in-memory data store pulling duty as cache, queue, and pub/sub bus.",
+        "resources": [
+          {
+            "site": "Hello Interview",
+            "title": "Redis",
+            "url": "https://www.hellointerview.com/learn/system-design/deep-dives/redis",
+            "status": "free",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "Elasticsearch Deep Dive",
+        "difficulty": "Intermediate",
+        "category": "HLD",
+        "about": "A search engine built on inverted indexes, shards, and near-real-time indexing.",
+        "resources": [
+          {
+            "site": "Hello Interview",
+            "title": "Elasticsearch",
+            "url": "https://www.hellointerview.com/learn/system-design/deep-dives/elasticsearch",
+            "status": "free",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "Cassandra Deep Dive",
+        "difficulty": "Intermediate",
+        "category": "HLD",
+        "about": "A write-optimized, decentralized wide-column store with no single point of failure.",
+        "resources": [
+          {
+            "site": "Hello Interview",
+            "title": "Cassandra",
+            "url": "https://www.hellointerview.com/learn/system-design/deep-dives/cassandra",
+            "status": "free",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "DynamoDB Deep Dive",
+        "difficulty": "Intermediate",
+        "category": "HLD",
+        "about": "AWS's managed key-value and document database, built on partition + sort keys.",
+        "resources": [
+          {
+            "site": "Hello Interview",
+            "title": "DynamoDB",
+            "url": "https://www.hellointerview.com/learn/system-design/deep-dives/dynamodb",
+            "status": "free",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "PostgreSQL Deep Dive",
+        "difficulty": "Intermediate",
+        "category": "HLD",
+        "about": "The relational workhorse: ACID transactions, rich indexes, and a deep extension ecosystem.",
+        "resources": [
+          {
+            "site": "Hello Interview",
+            "title": "PostgreSQL",
+            "url": "https://www.hellointerview.com/learn/system-design/deep-dives/postgres",
+            "status": "paid",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "Flink Deep Dive",
+        "difficulty": "Advanced",
+        "category": "HLD",
+        "about": "A stream processor built for event-time analytics across millions of events per second.",
+        "resources": [
+          {
+            "site": "Hello Interview",
+            "title": "Flink",
+            "url": "https://www.hellointerview.com/learn/system-design/deep-dives/flink",
+            "status": "paid",
+            "conf": "verified"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "L4",
+    "label": "Level 4",
+    "title": "System Design Case Studies",
+    "desc": "Ordered so each design leans on the last — start with a URL shortener, end somewhere like ChatGPT.",
+    "topics": [
+      {
+        "name": "URL Shortener",
+        "difficulty": "Beginner",
+        "category": "Case Study",
+        "about": "Turn a long URL into a tiny token: encode the ID, cache it, redirect on arrival.",
+        "sub": [
+          "Encoding",
+          "Collision Handling",
+          "Redirect & 302"
+        ],
+        "resources": [
+          {
+            "site": "ByteByteGo",
+            "title": "Design A URL Shortener",
+            "url": "https://bytebytego.com/courses/system-design-interview/design-a-url-shortener",
+            "status": "free",
+            "conf": "verified"
+          },
+          {
+            "site": "Hello Interview",
+            "title": "Bitly",
+            "url": "https://www.hellointerview.com/learn/system-design/problem-breakdowns/bitly",
+            "status": "free",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "Web Crawler",
+        "difficulty": "Beginner",
+        "category": "Case Study",
+        "about": "Discover and fetch pages at scale; politeness, dedup, and re-crawl policy matter.",
+        "resources": [
+          {
+            "site": "ByteByteGo",
+            "title": "Design A Web Crawler",
+            "url": "https://bytebytego.com/courses/system-design-interview/design-a-web-crawler",
+            "status": "free",
+            "conf": "verified"
+          },
+          {
+            "site": "Hello Interview",
+            "title": "Web Crawler",
+            "url": "https://www.hellointerview.com/learn/system-design/problem-breakdowns/web-crawler",
+            "status": "free",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "Notification System",
+        "difficulty": "Intermediate",
+        "category": "Case Study",
+        "about": "Fan messages out to push, email, and SMS with retries and per-channel templates.",
+        "resources": [
+          {
+            "site": "ByteByteGo",
+            "title": "Design A Notification System",
+            "url": "https://bytebytego.com/courses/system-design-interview/design-a-notification-system",
+            "status": "paid",
+            "conf": "reconstructed"
+          },
+          {
+            "site": "Hello Interview",
+            "title": "Notification System",
+            "url": "https://www.hellointerview.com/learn/system-design/problem-breakdowns/notification-system",
+            "status": "paid",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "Local Delivery Service (Gopuff-style)",
+        "difficulty": "Intermediate",
+        "category": "Case Study",
+        "about": "Micro-fulfillment: keep stock close, match couriers, and promise fast ETAs.",
+        "resources": [
+          {
+            "site": "Hello Interview",
+            "title": "Local Delivery Service",
+            "url": "https://www.hellointerview.com/learn/system-design/problem-breakdowns/gopuff",
+            "status": "free",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "Chat System",
+        "difficulty": "Intermediate",
+        "category": "Case Study",
+        "about": "Persistent conversations: presence, inbox threading, and reliable delivery receipts.",
+        "sub": [
+          "Presence",
+          "Inbox",
+          "Message Delivery"
+        ],
+        "resources": [
+          {
+            "site": "ByteByteGo",
+            "title": "Design A Chat System",
+            "url": "https://bytebytego.com/courses/system-design-interview/design-a-chat-system",
+            "status": "free",
+            "conf": "verified"
+          },
+          {
+            "site": "Hello Interview",
+            "title": "WhatsApp",
+            "url": "https://www.hellointerview.com/learn/system-design/problem-breakdowns/whatsapp",
+            "status": "free",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "News Feed",
+        "difficulty": "Intermediate",
+        "category": "Case Study",
+        "about": "Assemble a ranked, personalized stream fast enough to keep scrolling.",
+        "sub": [
+          "Fan-out on Write",
+          "Fan-out on Read"
+        ],
+        "resources": [
+          {
+            "site": "ByteByteGo",
+            "title": "Design A News Feed System",
+            "url": "https://bytebytego.com/courses/system-design-interview/design-a-news-feed-system",
+            "status": "free",
+            "conf": "reconstructed"
+          },
+          {
+            "site": "Hello Interview",
+            "title": "FB News Feed",
+            "url": "https://www.hellointerview.com/learn/system-design/problem-breakdowns/fb-news-feed",
+            "status": "free",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "YouTube",
+        "difficulty": "Intermediate",
+        "category": "Case Study",
+        "about": "Video upload, transcoding, and CDN-backed playback without buffering.",
+        "sub": [
+          "Upload Pipeline",
+          "Transcoding",
+          "CDN & Playback"
+        ],
+        "resources": [
+          {
+            "site": "ByteByteGo",
+            "title": "Design YouTube",
+            "url": "https://bytebytego.com/courses/system-design-interview/design-youtube",
+            "status": "free",
+            "conf": "verified"
+          },
+          {
+            "site": "Hello Interview",
+            "title": "YouTube",
+            "url": "https://www.hellointerview.com/learn/system-design/problem-breakdowns/youtube",
+            "status": "free",
+            "conf": "verified"
+          },
+          {
+            "site": "Hello Interview",
+            "title": "YouTube Top K",
+            "url": "https://www.hellointerview.com/learn/system-design/problem-breakdowns/top-k",
+            "status": "free",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "Ticketmaster",
+        "difficulty": "Intermediate",
+        "category": "Case Study",
+        "about": "Bursts of concurrent purchases for high-demand events without overselling.",
+        "resources": [
+          {
+            "site": "Hello Interview",
+            "title": "Ticketmaster",
+            "url": "https://www.hellointerview.com/learn/system-design/problem-breakdowns/ticketmaster",
+            "status": "free",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "Uber",
+        "difficulty": "Intermediate",
+        "category": "Case Study",
+        "about": "Match riders and drivers using location-aware search and real-time updates.",
+        "sub": [
+          "Driver Matching",
+          "Location Index",
+          "Ride Lifecycle"
+        ],
+        "resources": [
+          {
+            "site": "Hello Interview",
+            "title": "Uber",
+            "url": "https://www.hellointerview.com/learn/system-design/problem-breakdowns/uber",
+            "status": "free",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "Tinder",
+        "difficulty": "Intermediate",
+        "category": "Case Study",
+        "about": "Geo-proximity matching and fast, low-write swipe-state storage.",
+        "resources": [
+          {
+            "site": "Hello Interview",
+            "title": "Tinder",
+            "url": "https://www.hellointerview.com/learn/system-design/problem-breakdowns/tinder",
+            "status": "free",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "Dropbox",
+        "difficulty": "Intermediate",
+        "category": "Case Study",
+        "about": "File sync: chunk files, dedupe blocks, and propagate tiny diffs to every device.",
+        "resources": [
+          {
+            "site": "Hello Interview",
+            "title": "Dropbox",
+            "url": "https://www.hellointerview.com/learn/system-design/problem-breakdowns/dropbox",
+            "status": "free",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "Hotel Reservation System",
+        "difficulty": "Intermediate",
+        "category": "Case Study",
+        "about": "Inventory that must never oversell the same room, even under concurrent booking.",
+        "resources": [
+          {
+            "site": "ByteByteGo",
+            "title": "Hotel Reservation System",
+            "url": "https://bytebytego.com/courses/system-design-interview/hotel-reservation-system",
+            "status": "free",
+            "conf": "reconstructed"
+          }
+        ]
+      },
+      {
+        "name": "Ad Click Event Aggregation",
+        "difficulty": "Advanced",
+        "category": "Case Study",
+        "about": "Count billions of clicks and impressions with bounded latency and exactly-right totals.",
+        "resources": [
+          {
+            "site": "ByteByteGo",
+            "title": "Ad Click Event Aggregation",
+            "url": "https://bytebytego.com/courses/system-design-interview/ad-click-event-aggregation",
+            "status": "paid",
+            "conf": "reconstructed"
+          },
+          {
+            "site": "Hello Interview",
+            "title": "Ad Click Aggregator",
+            "url": "https://www.hellointerview.com/learn/system-design/problem-breakdowns/ad-click-aggregator",
+            "status": "free",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "FB Live Comments",
+        "difficulty": "Advanced",
+        "category": "Case Study",
+        "about": "Fan millions of hot comments into one live stream, ordered and fast.",
+        "resources": [
+          {
+            "site": "Hello Interview",
+            "title": "FB Live Comments",
+            "url": "https://www.hellointerview.com/learn/system-design/problem-breakdowns/fb-live-comments",
+            "status": "free",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "FB Post Search",
+        "difficulty": "Advanced",
+        "category": "Case Study",
+        "about": "An inverted index over billions of social posts with freshness and ranking.",
+        "resources": [
+          {
+            "site": "Hello Interview",
+            "title": "FB Post Search",
+            "url": "https://www.hellointerview.com/learn/system-design/problem-breakdowns/fb-post-search",
+            "status": "free",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "LeetCode-style Judge",
+        "difficulty": "Advanced",
+        "category": "Case Study",
+        "about": "Run user code in isolated sandboxes, feed test cases, and return a verdict.",
+        "resources": [
+          {
+            "site": "Hello Interview",
+            "title": "LeetCode",
+            "url": "https://www.hellointerview.com/learn/system-design/problem-breakdowns/leetcode",
+            "status": "free",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "Real-time Gaming Leaderboard",
+        "difficulty": "Advanced",
+        "category": "Case Study",
+        "about": "Keep scores ranked and recomputed at game speed across a huge playing field.",
+        "resources": [
+          {
+            "site": "ByteByteGo",
+            "title": "Real-time Gaming Leaderboard",
+            "url": "https://bytebytego.com/courses/system-design-interview/real-time-gaming-leaderboard",
+            "status": "free",
+            "conf": "reconstructed"
+          }
+        ]
+      },
+      {
+        "name": "Search Autocomplete",
+        "difficulty": "Advanced",
+        "category": "Case Study",
+        "about": "Prefix suggestions at type speed using a trie, frequency ranking, and caching.",
+        "resources": [
+          {
+            "site": "ByteByteGo",
+            "title": "Design A Search Autocomplete System",
+            "url": "https://bytebytego.com/courses/system-design-interview/design-a-search-autocomplete-system",
+            "status": "paid",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "Proximity Service / Nearby Friends",
+        "difficulty": "Advanced",
+        "category": "Case Study",
+        "about": "Geohash and spatial indexes answer the question 'who is near me right now?'",
+        "resources": [
+          {
+            "site": "ByteByteGo",
+            "title": "Proximity Service",
+            "url": "https://bytebytego.com/courses/system-design-interview/proximity-service",
+            "status": "paid",
+            "conf": "verified"
+          },
+          {
+            "site": "ByteByteGo",
+            "title": "Nearby Friends",
+            "url": "https://bytebytego.com/courses/system-design-interview/nearby-friends",
+            "status": "paid",
+            "conf": "reconstructed"
+          }
+        ]
+      },
+      {
+        "name": "Google Maps",
+        "difficulty": "Advanced",
+        "category": "Case Study",
+        "about": "Route planning and ETA computation on a planet-sized road graph.",
+        "resources": [
+          {
+            "site": "ByteByteGo",
+            "title": "Google Maps",
+            "url": "https://bytebytego.com/courses/system-design-interview/google-maps",
+            "status": "paid",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "Google Drive / Dropbox at Scale",
+        "difficulty": "Advanced",
+        "category": "Case Study",
+        "about": "Chunked, deduplicated, synced file storage engineered for billions of users.",
+        "resources": [
+          {
+            "site": "ByteByteGo",
+            "title": "Design Google Drive",
+            "url": "https://bytebytego.com/courses/system-design-interview/design-google-drive",
+            "status": "paid",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "Google Docs",
+        "difficulty": "Advanced",
+        "category": "Case Study",
+        "about": "CRDTs and operational transforms make many users edit one document together.",
+        "resources": [
+          {
+            "site": "Hello Interview",
+            "title": "Google Docs",
+            "url": "https://www.hellointerview.com/learn/system-design/problem-breakdowns/google-docs",
+            "status": "paid",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "Instagram",
+        "difficulty": "Advanced",
+        "category": "Case Study",
+        "about": "Media ingestion plus a personalized social feed at planetary scale.",
+        "resources": [
+          {
+            "site": "Hello Interview",
+            "title": "Instagram",
+            "url": "https://www.hellointerview.com/learn/system-design/problem-breakdowns/instagram",
+            "status": "paid",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "Yelp",
+        "difficulty": "Advanced",
+        "category": "Case Study",
+        "about": "Spatial search over geolocated businesses with reviews and personalization.",
+        "resources": [
+          {
+            "site": "Hello Interview",
+            "title": "Yelp",
+            "url": "https://www.hellointerview.com/learn/system-design/problem-breakdowns/yelp",
+            "status": "paid",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "Strava",
+        "difficulty": "Advanced",
+        "category": "Case Study",
+        "about": "Ingest GPS tracks from millions of athletes and analyze them into stats.",
+        "resources": [
+          {
+            "site": "Hello Interview",
+            "title": "Strava",
+            "url": "https://www.hellointerview.com/learn/system-design/problem-breakdowns/strava",
+            "status": "paid",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "News Aggregator (Reddit-style)",
+        "difficulty": "Advanced",
+        "category": "Case Study",
+        "about": "Ingest articles from everywhere, then rank and personalize a front page.",
+        "resources": [
+          {
+            "site": "Hello Interview",
+            "title": "News Aggregator",
+            "url": "https://www.hellointerview.com/learn/system-design/problem-breakdowns/google-news",
+            "status": "paid",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "Price Tracking Service",
+        "difficulty": "Advanced",
+        "category": "Case Study",
+        "about": "Crawl and diff prices over time, then alert when a target threshold is crossed.",
+        "resources": [
+          {
+            "site": "Hello Interview",
+            "title": "Price Tracking Service",
+            "url": "https://www.hellointerview.com/learn/system-design/problem-breakdowns/camelcamelcamel",
+            "status": "paid",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "Distributed Cache",
+        "difficulty": "Advanced",
+        "category": "Case Study",
+        "about": "A cache that lives across many machines: consistent hashing, eviction, and failover.",
+        "resources": [
+          {
+            "site": "Hello Interview",
+            "title": "Distributed Cache",
+            "url": "https://www.hellointerview.com/learn/system-design/problem-breakdowns/distributed-cache",
+            "status": "paid",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "Online Auction",
+        "difficulty": "Advanced",
+        "category": "Case Study",
+        "about": "Concurrent bids with strict ordering and sniping protection.",
+        "resources": [
+          {
+            "site": "Hello Interview",
+            "title": "Online Auction",
+            "url": "https://www.hellointerview.com/learn/system-design/problem-breakdowns/online-auction",
+            "status": "paid",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "Job Scheduler",
+        "difficulty": "Advanced",
+        "category": "Case Study",
+        "about": "Cron at scale: durable, distributed scheduling with retries and leader election.",
+        "resources": [
+          {
+            "site": "Hello Interview",
+            "title": "Job Scheduler",
+            "url": "https://www.hellointerview.com/learn/system-design/problem-breakdowns/job-scheduler",
+            "status": "paid",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "Metrics Monitoring & Alerting",
+        "difficulty": "Advanced",
+        "category": "Case Study",
+        "about": "Ingest, store, query, and alert on system telemetry without missing the signal.",
+        "resources": [
+          {
+            "site": "ByteByteGo",
+            "title": "Metrics Monitoring and Alerting System",
+            "url": "https://bytebytego.com/courses/system-design-interview/metrics-monitoring-and-alerting-system",
+            "status": "paid",
+            "conf": "verified"
+          },
+          {
+            "site": "Hello Interview",
+            "title": "Metrics Monitoring",
+            "url": "https://www.hellointerview.com/learn/system-design/problem-breakdowns/metrics-monitoring",
+            "status": "paid",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "Payment System",
+        "difficulty": "Advanced",
+        "category": "Case Study",
+        "about": "Money movement with exactly-once semantics and reconciliation built in.",
+        "resources": [
+          {
+            "site": "ByteByteGo",
+            "title": "Payment System",
+            "url": "https://bytebytego.com/courses/system-design-interview/payment-system",
+            "status": "paid",
+            "conf": "reconstructed"
+          },
+          {
+            "site": "Hello Interview",
+            "title": "Payment System",
+            "url": "https://www.hellointerview.com/learn/system-design/problem-breakdowns/payment-system",
+            "status": "paid",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "Digital Wallet",
+        "difficulty": "Advanced",
+        "category": "Case Study",
+        "about": "Balances, a correct ledger, and transfers that never lose or double-spend.",
+        "resources": [
+          {
+            "site": "ByteByteGo",
+            "title": "Digital Wallet",
+            "url": "https://bytebytego.com/courses/system-design-interview/digital-wallet",
+            "status": "paid",
+            "conf": "reconstructed"
+          }
+        ]
+      },
+      {
+        "name": "Stock Exchange / Robinhood",
+        "difficulty": "Advanced",
+        "category": "Case Study",
+        "about": "An order book plus a matching engine running at very low latency.",
+        "resources": [
+          {
+            "site": "ByteByteGo",
+            "title": "Stock Exchange",
+            "url": "https://bytebytego.com/courses/system-design-interview/stock-exchange",
+            "status": "paid",
+            "conf": "reconstructed"
+          },
+          {
+            "site": "Hello Interview",
+            "title": "Robinhood",
+            "url": "https://www.hellointerview.com/learn/system-design/problem-breakdowns/robinhood",
+            "status": "paid",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "Distributed Email Service",
+        "difficulty": "Advanced",
+        "category": "Case Study",
+        "about": "SMTP in, durable storage, search, and SMTP out for millions of mailboxes.",
+        "resources": [
+          {
+            "site": "ByteByteGo",
+            "title": "Distributed Email Service",
+            "url": "https://bytebytego.com/courses/system-design-interview/distributed-email-service",
+            "status": "paid",
+            "conf": "reconstructed"
+          }
+        ]
+      },
+      {
+        "name": "S3-like Object Storage",
+        "difficulty": "Advanced",
+        "category": "Case Study",
+        "about": "Simple HTTP get/put blobs spread across a fleet of storage nodes.",
+        "resources": [
+          {
+            "site": "ByteByteGo",
+            "title": "S3-like Object Storage",
+            "url": "https://bytebytego.com/courses/system-design-interview/s3-like-object-storage",
+            "status": "paid",
+            "conf": "reconstructed"
+          }
+        ]
+      },
+      {
+        "name": "Online Chess",
+        "difficulty": "Advanced",
+        "category": "Case Study",
+        "about": "Turn-based sync, move validation, and matchmaking over websockets.",
+        "resources": [
+          {
+            "site": "Hello Interview",
+            "title": "Online Chess",
+            "url": "https://www.hellointerview.com/learn/system-design/problem-breakdowns/online-chess",
+            "status": "paid",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "ChatGPT-style System",
+        "difficulty": "Advanced",
+        "category": "Case Study",
+        "about": "Serving a large language model: prompts, token streaming, caching, and cost.",
+        "resources": [
+          {
+            "site": "Hello Interview",
+            "title": "ChatGPT",
+            "url": "https://www.hellointerview.com/learn/system-design/problem-breakdowns/chatgpt",
+            "status": "paid",
+            "conf": "verified"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "L5",
+    "label": "Level 5",
+    "title": "Advanced Architecture",
+    "desc": "The papers and production systems behind the tools you've been name-dropping. Course-level facts only — the site doesn't expose per-topic URLs here yet.",
+    "topics": [
+      {
+        "name": "Dynamo, Cassandra, Kafka, Chubby, HDFS, GFS, BigTable",
+        "difficulty": "Advanced",
+        "category": "HLD",
+        "about": "The canonical papers behind today's battle-tested systems: from Dynamo's ring to BigTable's tablets.",
+        "sub": [
+          "Dynamo",
+          "GFS / HDFS",
+          "BigTable",
+          "Kafka"
+        ],
+        "resources": [
+          {
+            "site": "DesignGurus",
+            "title": "Grokking the System Design Interview, Vol. II — 7 architecture studies",
+            "url": "https://www.designgurus.io/course-play/grokking-system-design-interview-ii/doc/course-overview-audience-scope-and-content",
+            "status": "unknown",
+            "conf": "verified"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "L6",
+    "label": "Level 6",
+    "title": "Low-Level Design",
+    "desc": "Zoom from 'how do machines talk' to 'how do I structure this class.' OOP, SOLID, then the classic LLD interview questions.",
+    "topics": [
+      {
+        "name": "What is an OOD Interview",
+        "difficulty": "Beginner",
+        "category": "LLD",
+        "about": "Here you are designing classes and behavior, not infrastructure or APIs.",
+        "resources": [
+          {
+            "site": "ByteByteGo",
+            "title": "What is an Object-Oriented Design Interview",
+            "url": "https://bytebytego.com/courses/object-oriented-design-interview/what-is-an-object-oriented-design-interview",
+            "status": "free",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "A Framework for the OOD Interview",
+        "difficulty": "Beginner",
+        "category": "LLD",
+        "about": "Collect requirements, define classes, wire relationships, then write the key methods.",
+        "resources": [
+          {
+            "site": "ByteByteGo",
+            "title": "A Framework for the OOD Interview",
+            "url": "https://bytebytego.com/courses/object-oriented-design-interview/a-framework-for-the-ood-interview",
+            "status": "free",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "OOP Fundamentals",
+        "difficulty": "Beginner",
+        "category": "LLD",
+        "about": "Encapsulation, inheritance, polymorphism, and abstraction — the four pillars.",
+        "resources": [
+          {
+            "site": "ByteByteGo",
+            "title": "OOP Fundamentals",
+            "url": "https://bytebytego.com/courses/object-oriented-design-interview/oop-fundamentals",
+            "status": "paid",
+            "conf": "reconstructed"
+          }
+        ]
+      },
+      {
+        "name": "Parking Lot",
+        "difficulty": "Intermediate",
+        "category": "LLD",
+        "about": "Model floors, spots, and ticketing; assign the right spot to the right vehicle.",
+        "sub": [
+          "Spot Assignment",
+          "Pricing",
+          "Floor Model"
+        ],
+        "resources": [
+          {
+            "site": "ByteByteGo",
+            "title": "Design a Parking Lot",
+            "url": "https://bytebytego.com/courses/object-oriented-design-interview/design-a-parking-lot",
+            "status": "free",
+            "conf": "verified"
+          }
+        ]
+      },
+      {
+        "name": "Vending Machine",
+        "difficulty": "Intermediate",
+        "category": "LLD",
+        "about": "The purchase flow as a state machine: money in, selection, dispense, change.",
+        "resources": [
+          {
+            "site": "ByteByteGo",
+            "title": "Design a Vending Machine",
+            "url": "https://bytebytego.com/courses/object-oriented-design-interview/design-a-vending-machine",
+            "status": "paid",
+            "conf": "reconstructed"
+          }
+        ]
+      },
+      {
+        "name": "ATM",
+        "difficulty": "Intermediate",
+        "category": "LLD",
+        "about": "PIN verification, account operations, and cash dispensing under a constrained UI.",
+        "resources": [
+          {
+            "site": "ByteByteGo",
+            "title": "Design an ATM System",
+            "url": "https://bytebytego.com/courses/object-oriented-design-interview/design-an-automated-teller-machine-atm",
+            "status": "paid",
+            "conf": "reconstructed"
+          }
+        ]
+      },
+      {
+        "name": "Elevator System",
+        "difficulty": "Intermediate",
+        "category": "LLD",
+        "about": "Optimal car scheduling, button handling, and door coordination inside a shaft.",
+        "resources": [
+          {
+            "site": "ByteByteGo",
+            "title": "Design an Elevator System",
+            "url": "https://bytebytego.com/courses/object-oriented-design-interview/design-an-elevator-system",
+            "status": "paid",
+            "conf": "reconstructed"
+          }
+        ]
+      },
+      {
+        "name": "Tic Tac Toe",
+        "difficulty": "Intermediate",
+        "category": "LLD",
+        "about": "Board state, win detection, and player turn logic in one small model.",
+        "resources": [
+          {
+            "site": "ByteByteGo",
+            "title": "Design a Tic Tac Toe Game",
+            "url": "https://bytebytego.com/courses/object-oriented-design-interview/design-a-tic-tac-toe-game",
+            "status": "paid",
+            "conf": "reconstructed"
+          }
+        ]
+      },
+      {
+        "name": "Blackjack",
+        "difficulty": "Intermediate",
+        "category": "LLD",
+        "about": "Cards, hands, dealer rules, and bet settlement.",
+        "resources": [
+          {
+            "site": "ByteByteGo",
+            "title": "Design a Blackjack Game",
+            "url": "https://bytebytego.com/courses/object-oriented-design-interview/design-a-blackjack-game",
+            "status": "paid",
+            "conf": "reconstructed"
+          }
+        ]
+      },
+      {
+        "name": "Movie Ticket Booking",
+        "difficulty": "Advanced",
+        "category": "LLD",
+        "about": "Shows, seat maps, reservations, and payments in one workflow.",
+        "resources": [
+          {
+            "site": "ByteByteGo",
+            "title": "Design a Movie Ticket Booking System",
+            "url": "https://bytebytego.com/courses/object-oriented-design-interview/movie-ticket-booking-system",
+            "status": "paid",
+            "conf": "reconstructed"
+          }
+        ]
+      },
+      {
+        "name": "Restaurant Management",
+        "difficulty": "Advanced",
+        "category": "LLD",
+        "about": "Tables, orders, kitchen tickets, and billing flowing through a restaurant.",
+        "resources": [
+          {
+            "site": "ByteByteGo",
+            "title": "Design a Restaurant Management System",
+            "url": "https://bytebytego.com/courses/object-oriented-design-interview/design-a-restaurant-management-system",
+            "status": "paid",
+            "conf": "reconstructed"
+          }
+        ]
+      },
+      {
+        "name": "Grocery Store System",
+        "difficulty": "Advanced",
+        "category": "LLD",
+        "about": "Carts, inventory, and checkout lanes as a single coherent model.",
+        "resources": [
+          {
+            "site": "ByteByteGo",
+            "title": "Design a Grocery Store System",
+            "url": "https://bytebytego.com/courses/object-oriented-design-interview/grocery-store-system",
+            "status": "paid",
+            "conf": "reconstructed"
+          }
+        ]
+      },
+      {
+        "name": "Shipping Locker System",
+        "difficulty": "Advanced",
+        "category": "LLD",
+        "about": "Lockers, package-to-locker assignment, and one-time retrieval codes.",
+        "resources": [
+          {
+            "site": "ByteByteGo",
+            "title": "Design a Shipping Locker System",
+            "url": "https://bytebytego.com/courses/object-oriented-design-interview/design-a-shipping-locker",
+            "status": "paid",
+            "conf": "reconstructed"
+          }
+        ]
+      },
+      {
+        "name": "Unix File Search",
+        "difficulty": "Advanced",
+        "category": "LLD",
+        "about": "Composite and predicate patterns to filter files by size, extension, or name.",
+        "resources": [
+          {
+            "site": "ByteByteGo",
+            "title": "Design a Unix File Search System",
+            "url": "https://bytebytego.com/courses/object-oriented-design-interview/design-a-unix-file-search",
+            "status": "paid",
+            "conf": "reconstructed"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "L7",
+    "label": "Level 7",
+    "title": "Design Patterns",
+    "desc": "Thin coverage so far — one confirmed page. Worth pairing with a proper Gang-of-Four reference until more sources are added.",
+    "topics": [
+      {
+        "name": "Facade Pattern",
+        "difficulty": "Intermediate",
+        "category": "Pattern",
+        "about": "One simple interface that hides a messy set of subsystems behind it.",
+        "resources": [
+          {
+            "site": "LowLevelDesignMastery",
+            "title": "Facade Pattern",
+            "url": "https://www.lowleveldesignmastery.com/design-patterns/structural/05-facade-pattern/",
+            "status": "unknown",
+            "conf": "verified"
+          }
+        ]
+      }
+    ]
+  }
+]
